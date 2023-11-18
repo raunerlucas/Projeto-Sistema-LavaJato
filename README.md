@@ -4,14 +4,14 @@ PW1 projeto
 # Diagrama do banco
 ```mermaid
 erDiagram
-  Empresa ||--o{ Endereco : Possui
-  Funcionario ||--o{ Endereco : Reside
-  Cliente ||--o{ Endereco : Reside
-  Empresa ||--o{ OrdemServico : Presta
-  Funcionario ||--o{ OrdemServico : Realiza
-  Cliente ||--o{ OrdemServico : Solicita
-  OrdemServico ||--o{ Servico : Inclui
-  Servico ||--o{ OrdemServico : Está incluso em
+  Empresa ||--o{ Endereco : Possui;
+  Funcionario ||--o{ Endereco : Reside;
+  Cliente ||--o{ Endereco : Reside;
+  Empresa ||--o{ OrdemServico : Presta;
+  Funcionario ||--o{ OrdemServico : Realiza;
+  Cliente ||--o{ OrdemServico : Solicita;
+  OrdemServico ||--o{ Servico : Inclui;
+  Servico ||--o{ OrdemServico : Está incluso em;
 
   Empresa {
       int id
@@ -19,7 +19,7 @@ erDiagram
       string CNPJ
       string email
       int id_endereco
-  }
+  };
 
   Funcionario {
       int id
@@ -31,7 +31,7 @@ erDiagram
       string senha
       boolean admin
       string email
-  }
+  };
 
   Cliente {
       int id
@@ -42,7 +42,7 @@ erDiagram
       string login
       string senha
       string email
-  }
+  };
 
   Endereco {
       int id
@@ -53,7 +53,7 @@ erDiagram
       string bairro
       string Cidade
       string Estado
-  }
+  };
 
   OrdemServico {
       int id
@@ -67,12 +67,12 @@ erDiagram
       date dataEmissao
       date previsaoTermino
       float ValorTotal
-  }
+  };
 
   Servico {
       int id
       string descricao
       float preco
-  }
+  };
 
 ```
