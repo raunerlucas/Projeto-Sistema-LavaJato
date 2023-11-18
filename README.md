@@ -24,4 +24,15 @@ erDiagram
       boolean admin
       string email
   }
+  Cliente ||--o{ Endereco : Reside
+  Cliente {
+      int id
+      int id_endereco
+      string nome
+      string Sobrenome
+      string cpf
+      string login
+      string senha
+      string email
+  }
 ```
