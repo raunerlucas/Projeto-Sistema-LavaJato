@@ -48,6 +48,7 @@ erDiagram
   Empresa ||--o{ OrdemServico : Presta
   Funcionario ||--o{ OrdemServico : Realiza
   Cliente ||--o{ OrdemServico : Solicita
+  Servico ||--o{ OrdemServico : Está incluso em
   OrdemServico {
       int id
       int id_funcionario
