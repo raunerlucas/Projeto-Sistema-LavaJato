@@ -45,4 +45,20 @@ erDiagram
       string Cidade
       string Estado
   }
+  Empresa ||--o{ OrdemServico : Presta
+  Funcionario ||--o{ OrdemServico : Realiza
+  Cliente ||--o{ OrdemServico : Solicita
+  OrdemServico {
+      int id
+      int id_funcionario
+      int id_cliente
+      int id_Empresa
+      int numOS
+      string status
+      boolean entregar
+      array servicosOrdem
+      date dataEmissao
+      date previsaoTermino
+      float ValorTotal
+  }
 ```
