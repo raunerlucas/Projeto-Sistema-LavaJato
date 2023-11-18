@@ -2,14 +2,6 @@
 PW1 projeto
 
 erDiagram
-  Company ||--o{ Address : Has
-  Employee ||--o{ Address : Resides
-  Customer ||--o{ Address : Resides
-  Company ||--o{ Order : Provides
-  Employee ||--o{ Order : Performs
-  Customer ||--o{ Order : Requests
-  Order ||--o{ Service : Includes
-  Service ||--o{ Order : Belongs to
 
   Company {
     int id
