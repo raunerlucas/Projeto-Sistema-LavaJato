@@ -62,7 +62,6 @@ erDiagram
       float ValorTotal
   }
   OrdemServico ||--o{ Servico : Inclui
-  Servico ||--o{ OrdemServico : Está incluso em
   Servico {
       int id
       string descricao
