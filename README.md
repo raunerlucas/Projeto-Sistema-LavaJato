@@ -35,4 +35,14 @@ erDiagram
       string senha
       string email
   }
+  Endereco {
+      int id
+      int cep
+      string logradouro
+      int numero
+      string complemento
+      string bairro
+      string Cidade
+      string Estado
+  }
 ```
