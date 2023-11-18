@@ -1,35 +1,36 @@
 # Projeto-Sistema-LavaJato
 PW1 projeto
+
+# Diagrama do banco
 ```mermaid
 erDiagram
   Company ||--o{ Address : Has
+  Company {
+      int id
+      varchar nomeFicticio
+      varchar CNPJ
+      varchar email
+      int id_endereco
+    }
   Employee ||--o{ Address : Resides
+  Employee {
+      int id
+      varchar nome
+      varchar Sobrenome
+      varchar cpf
+      int id_endereco
+      varchar login
+      varchar senha
+      bool admin
+      varchar email
+  }
+
   Customer ||--o{ Address : Resides
   Company ||--o{ Order : Provides
   Employee ||--o{ Order : Performs
   Customer ||--o{ Order : Requests
   Order ||--o{ Service : Includes
   Service ||--o{ Order : Belongs to
-
-  Company {
-    int id
-    varchar nomeFicticio
-    varchar CNPJ
-    varchar email
-    int id_endereco
-  }
-
-  Employee {
-    int id
-    varchar nome
-    varchar Sobrenome
-    varchar cpf
-    int id_endereco
-    varchar login
-    varchar senha
-    bool admin
-    varchar email
-  }
 
   Customer {
     int id
