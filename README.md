@@ -8,6 +8,7 @@ erDiagram
   Empresa {
       int id
       string nomeFicticio
+      string telefone
       string CNPJ
       string email
       int id_endereco
@@ -19,6 +20,7 @@ erDiagram
       string Sobrenome
       string cpf
       int id_endereco
+      string telefone
       string login
       string senha
       boolean admin
@@ -30,6 +32,7 @@ erDiagram
       int id_endereco
       string nome
       string Sobrenome
+      string telefone
       string cpf
       string login
       string senha
