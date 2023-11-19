@@ -75,4 +75,4 @@ erDiagram
 
 
 # Diagrama do Sistema
-<img src="https://raw.githubusercontent.com/raunerlucas/Projeto-Sistema-LavaJato/main/Projeto%20Sistema%20-%20Diag.%20Contexto.png?token=GHSAT0AAAAAACFIEK5HQHGZOKBUMRNL7USCZK2LAUQ" alt="Imagem-Diagrma-Sistema">
+<img src="https://raw.githubusercontent.com/raunerlucas/Projeto-Sistema-LavaJato/main/diagrama.png?token=GHSAT0AAAAAACFIEK5HGRUOUKEZWKW2MBI6ZK2MKQQ" alt="Imagem-Diagrma-Sistema">
