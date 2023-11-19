@@ -18,7 +18,7 @@ erDiagram
       int id
       string nome
       string Sobrenome
-      string cpf
+      string CPF
       int id_endereco
       string telefone
       string login
@@ -58,6 +58,7 @@ erDiagram
       int id_Empresa
       int numOS
       string status
+      string observacao
       boolean entregar
       array servicosOrdem
       date dataEmissao
