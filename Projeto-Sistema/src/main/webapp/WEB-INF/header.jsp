@@ -25,7 +25,7 @@
 <body>
     <header>
         <img src="images/logo.ico">
-        <h2>Lava Bem</h2>
+        <h1>Lava Bem</h1>
         <nav>
         </nav>
     </header>
