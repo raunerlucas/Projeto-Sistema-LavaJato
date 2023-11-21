@@ -1,7 +1,7 @@
     <footer>
         <div class="contact"></div>
         <div class="rights">
-            <h4>Todos os direitos reservados por Rauner<sup>&copy;</sup></h4>
+            <h4> &copy; Todos os direitos reservados por Rauner 2023</h4>
         </div>
     </footer>
 </body>

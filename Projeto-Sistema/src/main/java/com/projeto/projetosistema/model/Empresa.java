@@ -14,18 +14,22 @@ public class Empresa {
     private Endereco endereco;
     private Set<OrdemServico> ordensServicos = new LinkedHashSet<OrdemServico>();
 
-    public Empresa() {
+    public Empresa(Integer id, String nomeFicticio, String telefone, String CNPJ, String email) {
+        this.id = id;
+        this.nomeFicticio = nomeFicticio;
+        this.telefone = telefone;
+        this.CNPJ = CNPJ;
+        this.email = email;
     }
 
     public Empresa(Integer id, String nomeFicticio, String telefone, String CNPJ
-            , String email, Endereco endereco, Set<OrdemServico> ordensServicos) {
+            , String email, Endereco endereco) {
         this.id = id;
         this.nomeFicticio = nomeFicticio;
         this.telefone = telefone;
         this.CNPJ = CNPJ;
         this.email = email;
         this.endereco = endereco;
-        this.ordensServicos = ordensServicos;
     }
 
     public Empresa(String nomeFicticio, String telefone, String CNPJ, String email, Endereco endereco) {
