@@ -54,7 +54,7 @@ CREATE TABLE OrdemServico (
     id_cliente INTEGER REFERENCES Cliente(id) ON DELETE CASCADE,
     id_empresa INTEGER REFERENCES Empresa(id) ON DELETE CASCADE,
     numOS INTEGER UNIQUE,
-    status VARCHAR(255) CHECK (status IN ('aguardando', 'iniciado', 'finalizado')),
+    status VARCHAR(255) CHECK (status IN ('AGUARDANDO', 'INICIADO', 'FINALIZADO')),
     observacao VARCHAR(255),
     entregar BOOLEAN,
     servicosOrdem JSONB,
