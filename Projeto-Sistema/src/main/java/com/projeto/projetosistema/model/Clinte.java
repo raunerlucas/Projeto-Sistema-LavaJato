@@ -20,7 +20,7 @@ public class Clinte {
     }
 
     public Clinte(Integer id, String nome, String sobrenome, String CPF, String telefone,
-                  String login, String senha, String email, Endereco endereco, Set<OrdemServico> ordensServicos) {
+                  String login, String senha, String email, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -30,7 +30,6 @@ public class Clinte {
         this.senha = senha;
         this.email = email;
         this.endereco = endereco;
-        this.ordensServicos = ordensServicos;
     }
 
     public Clinte(String nome, String sobrenome, String CPF, String telefone,
