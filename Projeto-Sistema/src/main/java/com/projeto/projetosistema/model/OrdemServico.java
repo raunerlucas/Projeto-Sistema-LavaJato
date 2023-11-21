@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.projeto.projetosistema.model.Status.AGUARDANDO;
+
 public class OrdemServico {
     private Integer id;
     private Integer numeroOS;
     private Date dataEmissao;
     private Date previsaoTermino;
     private boolean entregar;
-    private Status status;
+    private Status status = AGUARDANDO;
     private Float valorTotal;
     private Funcionario funcionario;
     private Clinte clinte;

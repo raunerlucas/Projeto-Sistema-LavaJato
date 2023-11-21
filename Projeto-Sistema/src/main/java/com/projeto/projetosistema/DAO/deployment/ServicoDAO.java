@@ -52,12 +52,12 @@ public class ServicoDAO implements DAOInterface<Servico> {
     }
 
     @Override
-    public void editar(Servico ogj) throws ErroDAO {
+    public void editar(Servico obj) throws ErroDAO {
         try {
             PreparedStatement stm = con.prepareStatement("UPDATE Sevico SET descricao = ?, preco = ? WHERE id = ?");
-            stm.setString(1,ogj.getDescricao());
-            stm.setFloat(2,ogj.getPreco());
-            stm.setInt(3,ogj.getId());
+            stm.setString(1, obj.getDescricao());
+            stm.setFloat(2, obj.getPreco());
+            stm.setInt(3, obj.getId());
             stm.executeUpdate();
             stm.close();
         } catch (SQLException e) {

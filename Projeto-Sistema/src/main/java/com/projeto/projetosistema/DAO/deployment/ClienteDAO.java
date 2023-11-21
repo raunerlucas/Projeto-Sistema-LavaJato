@@ -64,21 +64,21 @@ public class ClienteDAO implements DAOInterface<Clinte> {
     }
 
     @Override
-    public void editar(Clinte ogj) throws ErroDAO {
+    public void editar(Clinte obj) throws ErroDAO {
         try {
             //(id_endereco, nome, sobrenome, telefone, cpf, login, senha, email)
             PreparedStatement stm = con.prepareStatement("UPDATE Cliente " +
                     "SET id_endereco = ?, nome = ?, sobrenome = ?, telefone = ?, cpf = ?, login = ?, senha = ?, email = ? " +
                     "WHERE id = ?;");
-            stm.setInt(1,ogj.getEndereco().getId());
-            stm.setString(2,ogj.getNome());
-            stm.setString(3,ogj.getSobrenome());
-            stm.setString(4,ogj.getTelefone());
-            stm.setString(5,ogj.getCPF());
-            stm.setString(6,ogj.getLogin());
-            stm.setString(7,ogj.getSenha());
-            stm.setString(8,ogj.getEmail());
-            stm.setInt(9,ogj.getId());
+            stm.setInt(1, obj.getEndereco().getId());
+            stm.setString(2, obj.getNome());
+            stm.setString(3, obj.getSobrenome());
+            stm.setString(4, obj.getTelefone());
+            stm.setString(5, obj.getCPF());
+            stm.setString(6, obj.getLogin());
+            stm.setString(7, obj.getSenha());
+            stm.setString(8, obj.getEmail());
+            stm.setInt(9, obj.getId());
             stm.close();
         } catch (SQLException e) {
             throw new ErroDAO(e);

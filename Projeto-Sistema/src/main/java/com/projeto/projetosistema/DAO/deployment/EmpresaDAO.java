@@ -57,15 +57,15 @@ public class EmpresaDAO implements DAOInterface<Empresa> {
     }
 
     @Override
-    public void editar(Empresa ogj) throws ErroDAO {
+    public void editar(Empresa obj) throws ErroDAO {
         try {
             PreparedStatement stm = con.prepareStatement("UPDATE Empresa SET nomeFicticio = ?, telefone = ?, CNPJ = ?, email = ?, id_endereco = ? WHERE id = ?");
-            stm.setString(1, ogj.getNomeFicticio());
-            stm.setString(2, ogj.getTelefone());
-            stm.setString(3, ogj.getCNPJ());
-            stm.setString(4, ogj.getEmail());
-            stm.setInt(5,ogj.getEndereco().getId());
-            stm.setInt(6,ogj.getId());
+            stm.setString(1, obj.getNomeFicticio());
+            stm.setString(2, obj.getTelefone());
+            stm.setString(3, obj.getCNPJ());
+            stm.setString(4, obj.getEmail());
+            stm.setInt(5, obj.getEndereco().getId());
+            stm.setInt(6, obj.getId());
             stm.executeUpdate();
             stm.close();
         } catch (SQLException e) {

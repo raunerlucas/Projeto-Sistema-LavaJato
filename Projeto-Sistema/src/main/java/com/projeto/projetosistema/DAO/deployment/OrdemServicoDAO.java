@@ -32,7 +32,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
     }
 
     @Override
-    public void editar(OrdemServico ogj) throws ErroDAO {
+    public void editar(OrdemServico obj) throws ErroDAO {
 
     }
 

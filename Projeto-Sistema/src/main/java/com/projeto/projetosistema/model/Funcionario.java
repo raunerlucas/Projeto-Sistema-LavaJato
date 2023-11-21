@@ -21,7 +21,7 @@ public class Funcionario {
     }
 
     public Funcionario(Integer id, String nome, String sobrenome, String CPF, String telefone, String login
-            , String senha, String email, boolean admin, Endereco endereco, Set<OrdemServico> ordensServicos) {
+            , String senha, String email, boolean admin, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -32,7 +32,6 @@ public class Funcionario {
         this.email = email;
         this.admin = admin;
         this.endereco = endereco;
-        this.ordensServicos = ordensServicos;
     }
 
     public Funcionario(String nome, String sobrenome, String CPF, String telefone,
@@ -47,6 +46,8 @@ public class Funcionario {
         this.admin = admin;
         this.endereco = endereco;
     }
+
+
 
     public void addOrdemServico(OrdemServico os){
         ordensServicos.add(os);

@@ -55,17 +55,17 @@ public class EnderecoDAO implements DAOInterface<Endereco> {
     }
 
     @Override
-    public void editar(Endereco ogj) throws ErroDAO {
+    public void editar(Endereco obj) throws ErroDAO {
         try {
             PreparedStatement stm = con.prepareStatement("UPDATE Endereco SET cep = ?, logradouro = ?, numero = ?, complemento = ?, bairro = ?, cidade = ?, estado = ?  WHERE id = ?;");
-            stm.setInt(1,ogj.getCEP());
-            stm.setString(2,ogj.getLogradouro());
-            stm.setInt(3,ogj.getNumero());
-            stm.setString(4,ogj.getComplemento());
-            stm.setString(5,ogj.getBairro());
-            stm.setString(6,ogj.getCidade());
-            stm.setString(7,ogj.getEstado());
-            stm.setInt(8,ogj.getId());
+            stm.setInt(1, obj.getCEP());
+            stm.setString(2, obj.getLogradouro());
+            stm.setInt(3, obj.getNumero());
+            stm.setString(4, obj.getComplemento());
+            stm.setString(5, obj.getBairro());
+            stm.setString(6, obj.getCidade());
+            stm.setString(7, obj.getEstado());
+            stm.setInt(8, obj.getId());
             stm.executeUpdate();
             stm.close();
         } catch (SQLException e) {
