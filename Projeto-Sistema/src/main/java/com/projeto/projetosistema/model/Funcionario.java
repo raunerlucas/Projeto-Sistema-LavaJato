@@ -14,6 +14,7 @@ public class Funcionario {
     private String senha;
     private String email;
     private boolean admin = false;
+    private boolean funcionario = true;
     private Endereco endereco;
     private Set<OrdemServico> ordensServicos = new LinkedHashSet<OrdemServico>();
 
@@ -92,6 +93,14 @@ public class Funcionario {
                 ", admin=" + admin +
                 ", endereco=" + endereco +
                 '}';
+    }
+
+    public boolean isFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(boolean funcionario) {
+        this.funcionario = funcionario;
     }
 
     public Integer getId() {

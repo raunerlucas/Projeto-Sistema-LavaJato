@@ -78,6 +78,7 @@ public class EmpresaDAO implements DAOInterface<Empresa> {
         Empresa empresa = null;
         try {
             PreparedStatement stm = con.prepareStatement("SELECT * FROM Empresa WHERE id = ?;");
+            stm.setInt(1,id);
             ResultSet rs = stm.executeQuery();
             //nomeFicticio, telefone, CNPJ, email, id_endereco
             if (rs.next()){

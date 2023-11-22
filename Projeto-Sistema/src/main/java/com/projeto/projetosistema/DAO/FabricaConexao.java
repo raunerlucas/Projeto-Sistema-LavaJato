@@ -21,7 +21,7 @@ public class FabricaConexao {
 */
         try {
             Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection("jdbc:postgresql://localhost/AINDANÃOOTEM","postgres","123");
+            return DriverManager.getConnection("jdbc:postgresql://localhost/projetoPW","postgres","123");
         } catch (ClassNotFoundException | SQLException e) {
             throw new ErroDAO("Erro na Fabrica de conexão: "+e);
         }

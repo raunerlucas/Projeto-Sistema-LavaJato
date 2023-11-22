@@ -9,7 +9,7 @@
             </label>
             <label>
                 Senha
-                <input type="text" name="senha" placeholder="Sua Senha">
+                <input type="password" name="senha" placeholder="Sua Senha">
             </label>
             <input type="submit" value="Logar">
         </form>

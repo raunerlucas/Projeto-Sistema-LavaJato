@@ -1,4 +1,4 @@
-package com.projeto.projetosistema;
+package com.projeto.projetosistema.controller;
 
 import java.io.*;
 import java.util.List;
@@ -22,7 +22,6 @@ public class Login extends HttpServlet {
         String tipo = request.getParameter("tipo");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
-        PrintWriter out = response.getWriter();
         if (Tools.validaValor(tipo) && Tools.validaValor(login) && Tools.validaValor(senha)) {
             ServletContext aplicacao = getServletContext();
             HttpSession sessao = request.getSession();

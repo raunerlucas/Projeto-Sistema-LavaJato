@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: rauner.lucas
@@ -27,5 +28,11 @@
         <img src="images/logo.ico">
         <h1>Lava Bem</h1>
         <nav>
+            <c:if test="${sessionScope.userSessao != null}">
+                <ul>
+                    <li><a href="logout">SAIR</a></li>
+                    <li><button type="button" onclick="editarUserSessao()">EDITAR</button></li>
+                </ul>
+            </c:if>
         </nav>
     </header>
