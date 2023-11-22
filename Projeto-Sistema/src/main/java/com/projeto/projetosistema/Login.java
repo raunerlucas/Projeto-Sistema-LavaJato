@@ -3,10 +3,15 @@ package com.projeto.projetosistema;
 import java.io.*;
 import java.util.List;
 
+import com.projeto.projetosistema.DAO.DAOInterface;
 import com.projeto.projetosistema.DAO.ErroDAO;
+import com.projeto.projetosistema.DAO.deployment.EmpresaDAO;
+import com.projeto.projetosistema.DAO.deployment.EnderecoDAO;
 import com.projeto.projetosistema.model.Clinte;
+import com.projeto.projetosistema.model.Empresa;
 import com.projeto.projetosistema.model.Funcionario;
 import com.projeto.projetosistema.utils.Tools;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
@@ -19,6 +24,7 @@ public class Login extends HttpServlet {
         String senha = request.getParameter("senha");
         PrintWriter out = response.getWriter();
         if (Tools.validaValor(tipo) && Tools.validaValor(login) && Tools.validaValor(senha)) {
+            ServletContext aplicacao = getServletContext();
             HttpSession sessao = request.getSession();
             sessao.invalidate();
             try {
@@ -27,6 +33,8 @@ public class Login extends HttpServlet {
                     if (func != null) {
                         sessao = request.getSession();
                         sessao.setAttribute("userSessao", func);
+                        aplicacao.setAttribute("empresa",pegaEmpresa());
+
                         response.sendRedirect("index.jsp");
                     } else {
                         response.sendRedirect("index.jsp?msg=FuncNaoEncotrado");
@@ -36,6 +44,8 @@ public class Login extends HttpServlet {
                     if (clint != null) {
                         sessao = request.getSession();
                         sessao.setAttribute("userSessao", clint);
+                        aplicacao.setAttribute("empresa",pegaEmpresa());
+
                         response.sendRedirect("index.jsp");
                     } else {
                         response.sendRedirect("index.jsp?msg=ClienteNaoEncotrado");
@@ -53,4 +63,12 @@ public class Login extends HttpServlet {
 
     public void destroy() {
     }
+
+    private Empresa pegaEmpresa() throws ErroDAO {
+        DAOInterface<Empresa> dao = new EmpresaDAO();
+        Empresa e = dao.buscar(1);
+        return e;
+    }
+
+
 }
