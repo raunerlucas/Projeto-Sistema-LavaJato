@@ -3,7 +3,7 @@
 <c:import url="WEB-INF/header.jsp"/>
 <article>
     <c:choose>
-        <c:when test="true">
+        <c:when test="${sessionScope.userSessao == null}">
             <c:import url="WEB-INF/login.jsp"/>
         </c:when>
         <c:otherwise>
