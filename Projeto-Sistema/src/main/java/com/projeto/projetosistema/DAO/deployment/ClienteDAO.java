@@ -146,6 +146,24 @@ public class ClienteDAO implements DAOInterface<Clinte> {
         }
         return clintes;
     }
+    public List<Clinte> buscarLazy() throws ErroDAO {
+        List<Clinte> clintes = new ArrayList<>();
+        try {
+//            (id_endereco, nome, sobrenome, telefone, cpf, login, senha, email)
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM Cliente");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()){
+                clintes.add(new Clinte(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("login"),
+                        rs.getString("senha")));
+            }
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+        return clintes;
+    }
 
     @Override
     public void close() throws ErroDAO {

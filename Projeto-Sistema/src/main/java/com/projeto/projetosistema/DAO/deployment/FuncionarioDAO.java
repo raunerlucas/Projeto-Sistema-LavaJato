@@ -150,6 +150,24 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
         return funcionarios;
     }
 
+    public List<Funcionario> buscarLazy() throws ErroDAO {
+        List<Funcionario> funcionarios = new ArrayList<>();
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM Funcionario;");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                funcionarios.add(new Funcionario(rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("login"),
+                        rs.getString("senha"),
+                        rs.getBoolean("admin")));
+            }
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+        return funcionarios;
+    }
+
     @Override
     public void close() throws ErroDAO {
         try {

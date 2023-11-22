@@ -19,6 +19,13 @@ public class Clinte {
     public Clinte() {
     }
 
+    public Clinte(Integer id, String nome, String login, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+    }
+
     public Clinte(Integer id, String nome, String sobrenome, String CPF, String telefone,
                   String login, String senha, String email, Endereco endereco) {
         this.id = id;

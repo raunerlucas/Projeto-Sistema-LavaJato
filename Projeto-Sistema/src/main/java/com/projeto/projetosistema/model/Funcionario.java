@@ -47,7 +47,13 @@ public class Funcionario {
         this.endereco = endereco;
     }
 
-
+    public Funcionario(Integer id, String nome, String login, String senha, boolean admin) {
+        this.id = id;
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+        this.admin = admin;
+    }
 
     public void addOrdemServico(OrdemServico os){
         ordensServicos.add(os);
