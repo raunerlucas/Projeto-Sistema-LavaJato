@@ -43,10 +43,6 @@ public class Servico {
                 '}';
     }
 
-    public String jsonbServico(){
-        return "\"id_servico\": "+id;
-    }
-
     public Integer getId() {
         return id;
     }

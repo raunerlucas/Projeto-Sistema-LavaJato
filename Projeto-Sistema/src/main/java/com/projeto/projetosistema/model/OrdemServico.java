@@ -14,6 +14,7 @@ public class OrdemServico {
     private Date previsaoTermino;
     private boolean entregar;
     private Status status = AGUARDANDO;
+    private String descricao;
     private Float valorTotal;
     private Funcionario funcionario;
     private Clinte clinte;
@@ -24,7 +25,7 @@ public class OrdemServico {
     }
 
     public OrdemServico(Integer id, Integer numeroOS, Date dataEmissao, Date previsaoTermino, boolean entregar,
-                        Status status, Float valorTotal, Funcionario funcionario, Clinte clinte,
+                        Status status, String descricao, Float valorTotal, Funcionario funcionario, Clinte clinte,
                         Empresa empresa, List<Servico> servicosOrdem) {
         this.id = id;
         this.numeroOS = numeroOS;
@@ -32,6 +33,7 @@ public class OrdemServico {
         this.previsaoTermino = previsaoTermino;
         this.entregar = entregar;
         this.status = status;
+        this.descricao = descricao;
         this.valorTotal = valorTotal;
         this.funcionario = funcionario;
         this.clinte = clinte;
@@ -40,12 +42,13 @@ public class OrdemServico {
     }
 
     public OrdemServico(Integer numeroOS, Date dataEmissao, Date previsaoTermino, boolean entregar, Status status,
-                        Float valorTotal, Funcionario funcionario, Clinte clinte, Empresa empresa) {
+                        String descricao, Float valorTotal, Funcionario funcionario, Clinte clinte, Empresa empresa) {
         this.numeroOS = numeroOS;
         this.dataEmissao = dataEmissao;
         this.previsaoTermino = previsaoTermino;
         this.entregar = entregar;
         this.status = status;
+        this.descricao = descricao;
         this.valorTotal = valorTotal;
         this.funcionario = funcionario;
         this.clinte = clinte;
@@ -53,10 +56,11 @@ public class OrdemServico {
     }
 
 
-    public void addServico(Servico s){
+    public void addServico(Servico s) {
         servicosOrdem.add(s);
     }
-    public void removeOrdemServico(Servico s){
+
+    public void removeOrdemServico(Servico s) {
         if (!servicosOrdem.isEmpty()) {
             servicosOrdem.remove(s);
         }
@@ -84,12 +88,25 @@ public class OrdemServico {
                 ", previsaoTermino=" + previsaoTermino +
                 ", entregar=" + entregar +
                 ", status=" + status +
+                ", descricao=" + descricao +
                 ", valorTotal=" + valorTotal +
                 ", funcionario=" + funcionario +
                 ", clinte=" + clinte +
                 ", empresa=" + empresa +
                 ", servicosOrdem=" + servicosOrdem +
                 '}';
+    }
+
+    public String jsonCreate() {
+        StringBuilder txt = new StringBuilder("[");
+        for (Servico s : servicosOrdem) {
+            txt.append("{\"id_servico\": ").append(s.getId()).append("},");
+        }
+        if (txt.charAt(txt.length() - 1) == ',') {
+            txt.deleteCharAt(txt.length() - 1);
+        }
+        txt.append("]");
+        return txt.toString();
     }
 
     public Integer getId() {
@@ -138,6 +155,14 @@ public class OrdemServico {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Float getValorTotal() {
