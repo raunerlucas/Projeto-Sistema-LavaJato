@@ -8,6 +8,7 @@
                 <c:choose>
                     <c:when test="${uS.isFuncionario()}">
                         <h4> Tipo - Funcionario </h4>
+                        <button type="button" onclick="cadatrarCleinte()">CADASTRAR CLIENTE</button>
                     </c:when>
                     <c:otherwise>
                         <h4> Tipo - Cliente </h4>
@@ -15,6 +16,8 @@
                 </c:choose>
             </c:when>
         </c:choose>
+    </div>
+    <div id="popApps">
 
     </div>
     <div>

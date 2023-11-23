@@ -35,4 +35,9 @@
                 </ul>
             </c:if>
         </nav>
+        <c:if test="${param.msg != null}">
+            <div id="msg-div">
+                <p>${param.msg}</p>
+            </div>
+        </c:if>
     </header>
