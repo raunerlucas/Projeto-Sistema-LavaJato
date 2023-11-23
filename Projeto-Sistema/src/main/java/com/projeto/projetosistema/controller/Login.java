@@ -1,13 +1,11 @@
 package com.projeto.projetosistema.controller;
 
 import java.io.*;
-import java.util.List;
 
 import com.projeto.projetosistema.DAO.DAOInterface;
 import com.projeto.projetosistema.DAO.ErroDAO;
 import com.projeto.projetosistema.DAO.deployment.EmpresaDAO;
-import com.projeto.projetosistema.DAO.deployment.EnderecoDAO;
-import com.projeto.projetosistema.model.Clinte;
+import com.projeto.projetosistema.model.Cliente;
 import com.projeto.projetosistema.model.Empresa;
 import com.projeto.projetosistema.model.Funcionario;
 import com.projeto.projetosistema.utils.Tools;
@@ -39,7 +37,7 @@ public class Login extends HttpServlet {
                         response.sendRedirect("index.jsp?msg=FuncNaoEncotrado");
                     }
                 } else if (tipo.equals("c")) {
-                    Clinte clint = Tools.validaCliente(login, senha);
+                    Cliente clint = Tools.validaCliente(login, senha);
                     if (clint != null) {
                         sessao = request.getSession();
                         sessao.setAttribute("userSessao", clint);

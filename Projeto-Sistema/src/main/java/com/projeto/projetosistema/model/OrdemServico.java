@@ -17,7 +17,7 @@ public class OrdemServico {
     private String descricao;
     private Float valorTotal;
     private Funcionario funcionario;
-    private Clinte clinte;
+    private Cliente cliente;
     private Empresa empresa;
     private List<Servico> servicosOrdem = new ArrayList<>();
 
@@ -25,7 +25,7 @@ public class OrdemServico {
     }
 
     public OrdemServico(Integer id, Integer numeroOS, Date dataEmissao, Date previsaoTermino, boolean entregar,
-                        Status status, String descricao, Float valorTotal, Funcionario funcionario, Clinte clinte,
+                        Status status, String descricao, Float valorTotal, Funcionario funcionario, Cliente cliente,
                         Empresa empresa, List<Servico> servicosOrdem) {
         this.id = id;
         this.numeroOS = numeroOS;
@@ -36,13 +36,13 @@ public class OrdemServico {
         this.descricao = descricao;
         this.valorTotal = valorTotal;
         this.funcionario = funcionario;
-        this.clinte = clinte;
+        this.cliente = cliente;
         this.empresa = empresa;
         this.servicosOrdem = servicosOrdem;
     }
 
     public OrdemServico(Integer numeroOS, Date dataEmissao, Date previsaoTermino, boolean entregar, Status status,
-                        String descricao, Float valorTotal, Funcionario funcionario, Clinte clinte, Empresa empresa) {
+                        String descricao, Float valorTotal, Funcionario funcionario, Cliente cliente, Empresa empresa) {
         this.numeroOS = numeroOS;
         this.dataEmissao = dataEmissao;
         this.previsaoTermino = previsaoTermino;
@@ -51,7 +51,7 @@ public class OrdemServico {
         this.descricao = descricao;
         this.valorTotal = valorTotal;
         this.funcionario = funcionario;
-        this.clinte = clinte;
+        this.cliente = cliente;
         this.empresa = empresa;
     }
 
@@ -91,7 +91,7 @@ public class OrdemServico {
                 ", descricao=" + descricao +
                 ", valorTotal=" + valorTotal +
                 ", funcionario=" + funcionario +
-                ", clinte=" + clinte +
+                ", cliente=" + cliente +
                 ", empresa=" + empresa +
                 ", servicosOrdem=" + servicosOrdem +
                 '}';
@@ -181,12 +181,12 @@ public class OrdemServico {
         this.funcionario = funcionario;
     }
 
-    public Clinte getClinte() {
-        return clinte;
+    public Cliente getClinte() {
+        return cliente;
     }
 
-    public void setClinte(Clinte clinte) {
-        this.clinte = clinte;
+    public void setClinte(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Empresa getEmpresa() {

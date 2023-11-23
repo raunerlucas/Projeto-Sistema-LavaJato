@@ -22,13 +22,14 @@ public class EnderecoDAO implements DAOInterface<Endereco> {
             PreparedStatement stm = con.prepareStatement("INSERT INTO Endereco (cep, logradouro, numero, complemento, bairro, cidade, estado) VALUES (?, ?, ?, ?, ?, ?,?);", Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, obj.getCEP());
             stm.setString(2, obj.getLogradouro());
-            stm.setString(3, obj.getComplemento());
-            stm.setString(4, obj.getBairro());
-            stm.setString(5, obj.getCidade());
-            stm.setString(6, obj.getEstado());
+            stm.setInt(3, obj.getNumero());
+            stm.setString(4, obj.getComplemento());
+            stm.setString(5, obj.getBairro());
+            stm.setString(6, obj.getCidade());
+            stm.setString(7, obj.getEstado());
             stm.executeUpdate();
             ResultSet rs = stm.getGeneratedKeys();
-            if (rs.next()){
+            if (rs.next()) {
                 obj.setId(rs.getInt("id"));
             }
             stm.close();
@@ -47,7 +48,7 @@ public class EnderecoDAO implements DAOInterface<Endereco> {
     public void deletar(int id) throws ErroDAO {
         try {
             PreparedStatement stm = con.prepareStatement("DELETE FROM Endereco WHERE id = ?");
-            stm.setInt(1,id);
+            stm.setInt(1, id);
             stm.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -79,10 +80,34 @@ public class EnderecoDAO implements DAOInterface<Endereco> {
         Endereco enderecos = null;
         try {
             PreparedStatement stm = con.prepareStatement("SELECT * FROM Endereco WHERE id = ?;");
-            stm.setInt(1,id);
+            stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             //(cep, logradouro, numero, complemento, bairro, cidade, estado)
-            while (rs.next()){
+            while (rs.next()) {
+                enderecos = new Endereco(rs.getInt("id"),
+                        rs.getInt("cep"),
+                        rs.getInt("numero"),
+                        rs.getString("logradouro"),
+                        rs.getString("complemento"),
+                        rs.getString("bairro"),
+                        rs.getString("cidade"),
+                        rs.getString("estado")
+                );
+            }
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+        return enderecos;
+    }
+
+    public Endereco buscarCep(int cep) throws ErroDAO {
+        Endereco enderecos = null;
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM Endereco WHERE cep = ?;");
+            stm.setInt(1, cep);
+            ResultSet rs = stm.executeQuery();
+            //(cep, logradouro, numero, complemento, bairro, cidade, estado)
+            while (rs.next()) {
                 enderecos = new Endereco(rs.getInt("id"),
                         rs.getInt("cep"),
                         rs.getInt("numero"),
@@ -106,7 +131,7 @@ public class EnderecoDAO implements DAOInterface<Endereco> {
             PreparedStatement stm = con.prepareStatement("SELECT * FROM Endereco;");
             ResultSet rs = stm.executeQuery();
             //(cep, logradouro, numero, complemento, bairro, cidade, estado)
-            while (rs.next()){
+            while (rs.next()) {
                 enderecos.add(new Endereco(rs.getInt("id"),
                         rs.getInt("cep"),
                         rs.getInt("numero"),

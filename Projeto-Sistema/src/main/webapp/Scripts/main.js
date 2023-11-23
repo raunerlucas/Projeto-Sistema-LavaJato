@@ -46,8 +46,7 @@ function cadatrarCleinte(){
                                 </label>
                                 <label>
                                     Email
-                                    <input type="email" name="email" placeholder=" exemplo@exp.com" 
-                                    pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_\`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$/" size="30" required >
+                                    <input type="email" name="email" placeholder=" exemplo@exp.com" size="30" required >
                                 </label>
                             </fieldset>
                             <fieldset>
@@ -61,24 +60,24 @@ function cadatrarCleinte(){
                                 </label>
                                 <label>
                                     Complemento
-                                    <input type="email" name="complemento" placeholder=" Complemento" >
+                                    <input type="text" name="complemento" placeholder=" Complemento" >
                                 </label>
                                 <label>
                                     Logradouro
-                                    <input type="email" name="logradouro" placeholder=" Logradouro" >
+                                    <input type="text" name="logradouro" placeholder=" Logradouro" >
                                 </label>
                                  <label>
                                     Bairro
-                                    <input type="email" name="bairro" placeholder=" Bairro" >
+                                    <input type="text" name="bairro" placeholder=" Bairro" >
                                 </label>
                                  <label>
                                     Cidade
-                                    <input type="email" name="cidade" placeholder=" Cidade" >
+                                    <input type="text" name="cidade" placeholder=" Cidade" >
                                 </label>
                                  <label>
                                     Estado
-                                    <input  type="email" name="estado" placeholder=" Estado" >
                                 </label>
+                                    <input  type="text" name="estado" placeholder=" Estado" >
                             </fieldset>
                             <input type="submit" value="Cadastrar">
                         </form>

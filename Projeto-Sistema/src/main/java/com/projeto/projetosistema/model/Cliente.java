@@ -4,7 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class Clinte {
+public class Cliente {
     private Integer id;
     private String nome;
     private String sobrenome;
@@ -13,21 +13,23 @@ public class Clinte {
     private String login;
     private String senha;
     private String email;
+    private boolean funcionario = false;
+
     private Endereco endereco;
     private Set<OrdemServico> ordensServicos = new LinkedHashSet<OrdemServico>();
 
-    public Clinte() {
+    public Cliente() {
     }
 
-    public Clinte(Integer id, String nome, String login, String senha) {
+    public Cliente(Integer id, String nome, String login, String senha) {
         this.id = id;
         this.nome = nome;
         this.login = login;
         this.senha = senha;
     }
 
-    public Clinte(Integer id, String nome, String sobrenome, String CPF, String telefone,
-                  String login, String senha, String email, Endereco endereco) {
+    public Cliente(Integer id, String nome, String sobrenome, String CPF, String telefone,
+                   String login, String senha, String email, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -39,8 +41,8 @@ public class Clinte {
         this.endereco = endereco;
     }
 
-    public Clinte(String nome, String sobrenome, String CPF, String telefone,
-                  String login, String senha, String email, Endereco endereco) {
+    public Cliente(String nome, String sobrenome, String CPF, String telefone,
+                   String login, String senha, String email, Endereco endereco) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.CPF = CPF;
@@ -64,9 +66,9 @@ public class Clinte {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Clinte)) return false;
-        Clinte clinte = (Clinte) o;
-        return Objects.equals(id, clinte.id) && Objects.equals(CPF, clinte.CPF);
+        if (!(o instanceof Cliente)) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(id, cliente.id) && Objects.equals(CPF, cliente.CPF);
     }
 
     @Override
@@ -76,7 +78,7 @@ public class Clinte {
 
     @Override
     public String toString() {
-        return "Clinte{" +
+        return "Cliente{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", sobrenome='" + sobrenome + '\'' +
@@ -87,6 +89,14 @@ public class Clinte {
                 ", email='" + email + '\'' +
                 ", endereco=" + endereco +
                 '}';
+    }
+
+    public boolean isFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(boolean funcionario) {
+        this.funcionario = funcionario;
     }
 
     public Integer getId() {

@@ -3,7 +3,7 @@ package com.projeto.projetosistema.DAO.deployment;
 import com.projeto.projetosistema.DAO.DAOInterface;
 import com.projeto.projetosistema.DAO.ErroDAO;
 import com.projeto.projetosistema.DAO.FabricaConexao;
-import com.projeto.projetosistema.model.Clinte;
+import com.projeto.projetosistema.model.Cliente;
 import com.projeto.projetosistema.model.Endereco;
 
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClienteDAO implements DAOInterface<Clinte> {
+public class ClienteDAO implements DAOInterface<Cliente> {
     private Connection con;
 
     public ClienteDAO() throws ErroDAO {
@@ -21,7 +21,7 @@ public class ClienteDAO implements DAOInterface<Clinte> {
     }
 
     @Override
-    public void inserir(Clinte obj) throws ErroDAO {
+    public void inserir(Cliente obj) throws ErroDAO {
         try {
             PreparedStatement stm = con.prepareStatement("INSERT INTO Cliente " +
                     "(id_endereco, nome, sobrenome, telefone, cpf, login, senha, email) " +
@@ -47,7 +47,7 @@ public class ClienteDAO implements DAOInterface<Clinte> {
     }
 
     @Override
-    public void deletar(Clinte obj) throws ErroDAO {
+    public void deletar(Cliente obj) throws ErroDAO {
         deletar(obj.getId());
     }
 
@@ -64,7 +64,7 @@ public class ClienteDAO implements DAOInterface<Clinte> {
     }
 
     @Override
-    public void editar(Clinte obj) throws ErroDAO {
+    public void editar(Cliente obj) throws ErroDAO {
         try {
             //(id_endereco, nome, sobrenome, telefone, cpf, login, senha, email)
             PreparedStatement stm = con.prepareStatement("UPDATE Cliente " +
@@ -87,8 +87,8 @@ public class ClienteDAO implements DAOInterface<Clinte> {
     }
 
     @Override
-    public Clinte buscar(int id) throws ErroDAO {
-        Clinte clintes = null;
+    public Cliente buscar(int id) throws ErroDAO {
+        Cliente clintes = null;
         try {
 //            (id_endereco, nome, sobrenome, telefone, cpf, login, senha, email)
             PreparedStatement stm = con.prepareStatement("SELECT * FROM Cliente WHERE id =?;");
@@ -99,7 +99,36 @@ public class ClienteDAO implements DAOInterface<Clinte> {
                 Endereco endereco = dao.buscar(rs.getInt("id_endereco"));
                 dao.close();
 
-                clintes = new Clinte(
+                clintes = new Cliente(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("sobrenome"),
+                        rs.getString("telefone"),
+                        rs.getString("cpf"),
+                        rs.getString("login"),
+                        rs.getString("senha"),
+                        rs.getString("email"),
+                        endereco
+                );
+            }
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+        return clintes;
+    }
+    public Cliente buscar(String cpf) throws ErroDAO {
+        Cliente clintes = null;
+        try {
+//            (id_endereco, nome, sobrenome, telefone, cpf, login, senha, email)
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM Cliente WHERE cpf = ?;");
+            stm.setString(1,cpf);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()){
+                DAOInterface<Endereco> dao = new EnderecoDAO();
+                Endereco endereco = dao.buscar(rs.getInt("id_endereco"));
+                dao.close();
+
+                clintes = new Cliente(
                         rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("sobrenome"),
@@ -118,8 +147,8 @@ public class ClienteDAO implements DAOInterface<Clinte> {
     }
 
     @Override
-    public List<Clinte> buscar() throws ErroDAO {
-        List<Clinte> clintes = new ArrayList<>();
+    public List<Cliente> buscar() throws ErroDAO {
+        List<Cliente> clientes = new ArrayList<>();
         try {
 //            (id_endereco, nome, sobrenome, telefone, cpf, login, senha, email)
             PreparedStatement stm = con.prepareStatement("SELECT * FROM Cliente");
@@ -129,7 +158,7 @@ public class ClienteDAO implements DAOInterface<Clinte> {
                 Endereco endereco = dao.buscar(rs.getInt("id_endereco"));
                 dao.close();
 
-                clintes.add(new Clinte(
+                clientes.add(new Cliente(
                         rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("sobrenome"),
@@ -144,16 +173,16 @@ public class ClienteDAO implements DAOInterface<Clinte> {
         } catch (SQLException e) {
             throw new ErroDAO(e);
         }
-        return clintes;
+        return clientes;
     }
-    public List<Clinte> buscarLazy() throws ErroDAO {
-        List<Clinte> clintes = new ArrayList<>();
+    public List<Cliente> buscarLazy() throws ErroDAO {
+        List<Cliente> clientes = new ArrayList<>();
         try {
 //            (id_endereco, nome, sobrenome, telefone, cpf, login, senha, email)
             PreparedStatement stm = con.prepareStatement("SELECT * FROM Cliente");
             ResultSet rs = stm.executeQuery();
             while (rs.next()){
-                clintes.add(new Clinte(
+                clientes.add(new Cliente(
                         rs.getInt("id"),
                         rs.getString("nome"),
                         rs.getString("login"),
@@ -162,7 +191,7 @@ public class ClienteDAO implements DAOInterface<Clinte> {
         } catch (SQLException e) {
             throw new ErroDAO(e);
         }
-        return clintes;
+        return clientes;
     }
 
     @Override

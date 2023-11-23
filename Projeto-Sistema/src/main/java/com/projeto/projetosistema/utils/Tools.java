@@ -1,13 +1,13 @@
 package com.projeto.projetosistema.utils;
 
-import com.projeto.projetosistema.DAO.DAOInterface;
 import com.projeto.projetosistema.DAO.ErroDAO;
 import com.projeto.projetosistema.DAO.deployment.ClienteDAO;
+import com.projeto.projetosistema.DAO.deployment.EnderecoDAO;
 import com.projeto.projetosistema.DAO.deployment.FuncionarioDAO;
-import com.projeto.projetosistema.model.Clinte;
+import com.projeto.projetosistema.model.Cliente;
+import com.projeto.projetosistema.model.Endereco;
 import com.projeto.projetosistema.model.Funcionario;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Tools {
@@ -33,20 +33,38 @@ public class Tools {
         }
         return funcionario;
     }
-    public static Clinte validaCliente(String login, String senha) throws ErroDAO {
-        Clinte clinte = null;
+
+    public static Endereco validaEndereco(int cep) throws ErroDAO {
+        Endereco en = null;
+        try (EnderecoDAO dao = new EnderecoDAO()) {
+            en = dao.buscarCep(cep);
+        } catch (ErroDAO e) {
+            throw new ErroDAO(e);
+        }
+        return en;
+    }
+    public static Cliente validaCliente(String login, String senha) throws ErroDAO {
+        Cliente cliente = null;
         try (ClienteDAO dao = new ClienteDAO()) {
-            List<Clinte> clintes = dao.buscarLazy();
-            for (Clinte c : clintes) {
+            List<Cliente> clientes = dao.buscarLazy();
+            for (Cliente c : clientes) {
                 if (c.getLogin().equals(login) && c.getSenha().equals(senha)) {
-                    clinte = c;
+                    cliente = c;
                     break;
                 }
             }
         } catch (ErroDAO e) {
             throw new ErroDAO(e);
         }
-        return clinte;
+        return cliente;
+    }
+
+    public static String trataCPF(String cpf){
+        return cpf.replaceAll("[.-]", "");
+    }
+    public static String trataTelefone(String telefone) {
+        // Remove parênteses, espaços, traço e retorna apenas os dígitos
+        return telefone.replaceAll("[()\\s-]", "");
     }
 
 }

@@ -109,8 +109,8 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                 Funcionario funcionario = daoF.buscar(rs.getInt("id_funcionario"));
                 daoF.close();
 
-                DAOInterface<Clinte> daoC = new ClienteDAO();
-                Clinte cliente = daoC.buscar(rs.getInt("id_cliente"));
+                DAOInterface<Cliente> daoC = new ClienteDAO();
+                Cliente cliente = daoC.buscar(rs.getInt("id_cliente"));
                 daoC.close();
 
                 List<Servico> servicosDaOrdem = new ArrayList<>();
@@ -158,8 +158,8 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                 Funcionario funcionario = daoF.buscar(rs.getInt("id_funcionario"));
                 daoF.close();
 
-                DAOInterface<Clinte> daoC = new ClienteDAO();
-                Clinte cliente = daoC.buscar(rs.getInt("id_cliente"));
+                DAOInterface<Cliente> daoC = new ClienteDAO();
+                Cliente cliente = daoC.buscar(rs.getInt("id_cliente"));
                 daoC.close();
 
                 List<Servico> servicosDaOrdem = new ArrayList<>();
@@ -195,7 +195,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
         return ordemServicos;
     }
 
-    public List<OrdemServico> buscarPorCliente(Clinte obj) throws ErroDAO {
+    public List<OrdemServico> buscarPorCliente(Cliente obj) throws ErroDAO {
         List<OrdemServico> ordensServico = new ArrayList<>();
 
         try {
@@ -254,8 +254,8 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
-                DAOInterface<Clinte> daoC = new ClienteDAO();
-                Clinte cliente = daoC.buscar(rs.getInt("id_cliente"));
+                DAOInterface<Cliente> daoC = new ClienteDAO();
+                Cliente cliente = daoC.buscar(rs.getInt("id_cliente"));
                 daoC.close();
 
                 List<Servico> servicosDaOrdem = new ArrayList<>();
