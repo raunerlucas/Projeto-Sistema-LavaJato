@@ -15,74 +15,11 @@ function mudarLogin(evento){
 }
 
 function cadatrarCleinte(){
-    let formC = `<h3>Cadastro de Cliente</h3>
-                        <form method="post" action="cadastrarCliente">
-                            <fieldset>
-                                <label>
-                                    Nome
-                                    <input required type="text" name="nome" placeholder=" Nome" maxlength="25">
-                                </label>
-                                <label>
-                                    Sobrenome
-                                    <input type="text" name="sobrenome" placeholder=" Sobrenome" maxlength="25">
-                                </label>
-                                <label>
-                                    CPF
-                                    <input required type="text" name="cpf" placeholder=" 000.000.000-00" oninput="formatarCPF(this)" >
-                                </label>
-                                <label>
-                                    Telefone
-                                    <input required type="text" name="telefone" placeholder=" (##) #####-####" maxlength="15" onkeypress="formatarTelefone('(##) #####-####',this)">
-                                </label>
-                            </fieldset>
-                            <fieldset>
-                                <label>
-                                    Login
-                                    <input type="text" name="login" placeholder=" Login" maxlength="25">
-                                </label>
-                                <label>
-                                    Senha
-                                    <input type="text" name="senha" placeholder=" Senha" maxlength="25">
-                                </label>
-                                <label>
-                                    Email
-                                    <input type="email" name="email" placeholder=" exemplo@exp.com" size="30" required >
-                                </label>
-                            </fieldset>
-                            <fieldset>
-                                <label>
-                                    Cep
-                                    <input required type="number" name="cep" placeholder=" 00000000"  maxlength="8" oninput="buscarCep(this)">
-                                </label>
-                                <label>
-                                    Numero
-                                    <input type="number" name="numero" placeholder=" Numero" >
-                                </label>
-                                <label>
-                                    Complemento
-                                    <input type="text" name="complemento" placeholder=" Complemento" >
-                                </label>
-                                <label>
-                                    Logradouro
-                                    <input type="text" name="logradouro" placeholder=" Logradouro" >
-                                </label>
-                                 <label>
-                                    Bairro
-                                    <input type="text" name="bairro" placeholder=" Bairro" >
-                                </label>
-                                 <label>
-                                    Cidade
-                                    <input type="text" name="cidade" placeholder=" Cidade" >
-                                </label>
-                                 <label>
-                                    Estado
-                                </label>
-                                    <input  type="text" name="estado" placeholder=" Estado" >
-                            </fieldset>
-                            <input type="submit" value="Cadastrar">
-                        </form>
-    `
     document.getElementById("popApps").innerHTML = formC;
+}
+
+function cadatrarFuncio(){
+    document.getElementById("popApps").innerHTML = formF;
 }
 
 function formatarCPF(i){
@@ -107,10 +44,10 @@ function formatarTelefone(mascara, documento) {
 }
 async function buscarCep(i){
     if (i.value.length === 8) {
-        let logra = document.forms[0][13];
-        let bairro = document.forms[0][14];
-        let cidade = document.forms[0][15];
-        let estado = document.forms[0][16];
+        let logra = document.getElementById("lograC");
+        let bairro = document.getElementById("bairroC");
+        let cidade = document.getElementById("cidadeC");
+        let estado = document.getElementById("estadoC");
 
         fetch("https://viacep.com.br/ws/" + i.value + "/json/")
             .then(response => response.json())

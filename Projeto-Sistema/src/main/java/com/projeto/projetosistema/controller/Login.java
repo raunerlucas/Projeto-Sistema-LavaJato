@@ -17,6 +17,9 @@ import jakarta.servlet.annotation.*;
 public class Login extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         String tipo = request.getParameter("tipo");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
@@ -34,7 +37,7 @@ public class Login extends HttpServlet {
 
                         response.sendRedirect("index.jsp");
                     } else {
-                        response.sendRedirect("index.jsp?msg=FuncNaoEncotrado");
+                        response.sendRedirect("index.jsp?msg=Funcionario não Encotrado");
                     }
                 } else if (tipo.equals("c")) {
                     Cliente clint = Tools.validaCliente(login, senha);
@@ -45,16 +48,16 @@ public class Login extends HttpServlet {
 
                         response.sendRedirect("index.jsp");
                     } else {
-                        response.sendRedirect("index.jsp?msg=ClienteNaoEncotrado");
+                        response.sendRedirect("index.jsp?msg=Cliente não Encotrado");
                     }
                 } else {
-                    response.sendRedirect("index.jsp?msg=TipoErrado");
+                    response.sendRedirect("index.jsp?msg=Tipo Errado");
                 }
             } catch (ErroDAO e) {
                 throw new RuntimeException(e);
             }
         } else {
-            response.sendRedirect("index.jsp?msg=faltaDados");
+            response.sendRedirect("index.jsp?msg=Falta Dados");
         }
     }
 

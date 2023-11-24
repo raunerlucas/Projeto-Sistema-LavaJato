@@ -16,6 +16,8 @@ import java.io.IOException;
 public class Logout extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         HttpSession sessao = request.getSession();
         if (sessao.getAttribute("userSessao") != null) {
             sessao.invalidate();

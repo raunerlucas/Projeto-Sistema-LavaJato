@@ -95,7 +95,37 @@ public class FuncionarioDAO implements DAOInterface<Funcionario> {
         Funcionario funcionarios = null;
         try {
 //        id_endereco, nome, sobrenome, cpf, telefone, login, senha, admin, email
-            PreparedStatement stm = con.prepareStatement("SELECT * FROM Funcionario;");
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM Funcionario WHERE id = ?;");
+            stm.setInt(1,id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                DAOInterface<Endereco> dao = new EnderecoDAO();
+                Endereco endereco = dao.buscar(rs.getInt("id_endereco"));
+                dao.close();
+
+                funcionarios = new Funcionario(rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getString("sobrenome"),
+                        rs.getString("cpf"),
+                        rs.getString("telefone"),
+                        rs.getString("login"),
+                        rs.getString("senha"),
+                        rs.getString("email"),
+                        rs.getBoolean("admin"),
+                        endereco
+                );
+            }
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+        return funcionarios;
+    }
+    public Funcionario buscar(String cpf) throws ErroDAO {
+        Funcionario funcionarios = null;
+        try {
+//        id_endereco, nome, sobrenome, cpf, telefone, login, senha, admin, email
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM Funcionario WHERE cpf = ?;");
+            stm.setString(1,cpf);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 DAOInterface<Endereco> dao = new EnderecoDAO();

@@ -14,6 +14,7 @@
     <link rel="icon" type="image/png" href="images/logo.ico">
     <link rel="stylesheet" type="text/css" href="Styles/styles.css">
     <script type="text/javascript" defer src="Scripts/main.js"></script>
+    <script type="text/javascript" defer src="Scripts/draw.js"></script>
 
     <title>Lava Bem</title>
 
