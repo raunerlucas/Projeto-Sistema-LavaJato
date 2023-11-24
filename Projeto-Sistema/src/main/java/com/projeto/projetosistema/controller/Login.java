@@ -1,10 +1,13 @@
 package com.projeto.projetosistema.controller;
 
 import java.io.*;
+import java.util.List;
 
 import com.projeto.projetosistema.DAO.DAOInterface;
 import com.projeto.projetosistema.DAO.ErroDAO;
+import com.projeto.projetosistema.DAO.deployment.ClienteDAO;
 import com.projeto.projetosistema.DAO.deployment.EmpresaDAO;
+import com.projeto.projetosistema.DAO.deployment.FuncionarioDAO;
 import com.projeto.projetosistema.model.Cliente;
 import com.projeto.projetosistema.model.Empresa;
 import com.projeto.projetosistema.model.Funcionario;
@@ -18,7 +21,7 @@ public class Login extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-16");
 
         String tipo = request.getParameter("tipo");
         String login = request.getParameter("login");
@@ -33,7 +36,11 @@ public class Login extends HttpServlet {
                     if (func != null) {
                         sessao = request.getSession();
                         sessao.setAttribute("userSessao", func);
-                        aplicacao.setAttribute("empresa",pegaEmpresa());
+                        aplicacao.setAttribute("empresa",getEmpresa());
+
+                        aplicacao.setAttribute("clientes",getClientes());
+                        if (func.isAdmin())
+                            aplicacao.setAttribute("funcionarios",getFuncionarios());
 
                         response.sendRedirect("index.jsp");
                     } else {
@@ -44,7 +51,7 @@ public class Login extends HttpServlet {
                     if (clint != null) {
                         sessao = request.getSession();
                         sessao.setAttribute("userSessao", clint);
-                        aplicacao.setAttribute("empresa",pegaEmpresa());
+                        aplicacao.setAttribute("empresa",getEmpresa());
 
                         response.sendRedirect("index.jsp");
                     } else {
@@ -64,10 +71,21 @@ public class Login extends HttpServlet {
     public void destroy() {
     }
 
-    private Empresa pegaEmpresa() throws ErroDAO {
+    private Empresa getEmpresa() throws ErroDAO {
         DAOInterface<Empresa> dao = new EmpresaDAO();
         Empresa e = dao.buscar(1);
         return e;
+    }
+
+    private List<Cliente> getClientes() throws ErroDAO {
+        DAOInterface<Cliente> dao = new ClienteDAO();
+        List<Cliente> cl = dao.buscar();
+        return cl;
+    }
+    private List<Funcionario> getFuncionarios() throws ErroDAO {
+        DAOInterface<Funcionario> dao = new FuncionarioDAO();
+        List<Funcionario> fs = dao.buscar();
+        return fs;
     }
 
 
