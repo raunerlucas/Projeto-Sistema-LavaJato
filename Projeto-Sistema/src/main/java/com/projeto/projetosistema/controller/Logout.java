@@ -27,6 +27,8 @@ public class Logout extends HttpServlet {
                 aplicacao.removeAttribute("clientes");
                 if (aplicacao.getAttribute("funcionarios") != null)
                     aplicacao.removeAttribute("funcionarios");
+                if (aplicacao.getAttribute("ordemSevico") != null)
+                    aplicacao.removeAttribute("ordemSevico");
             }
             response.sendRedirect("index.jsp?msg=Tchau");
         } else {

@@ -1,15 +1,26 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section>
+    <c:set var="uS" value="${sessionScope.userSessao}"/>
     <div id="popApps">
     </div>
     <div class="ordens-servico">
         <h2> Ordem de Servico </h2>
+        <c:if test="${uS.isFuncionario()}">
+            <a href="CadastrarOrdem.jsp">NOVA</a>
+        </c:if>
+        <c:forEach var="ordem" items="${applicationScope.ordemSevico}" >
+            <li>
+                <button>
+                    <span>Numero: ${ordem.getNumeroOS()}</span>
+                </button>
+            </li>
+        </c:forEach>
     </div>
-    <c:set var="uS" value="${sessionScope.userSessao}"/>
     <c:if test="${uS.isFuncionario()}">
         <div class="cliente">
             <h2> Clientes </h2>
+            <button type="button" onclick="cadatrarCleinte()">CADASTRAR CLIENTE</button>
             <ol>
                 <c:forEach var="cli" items="${applicationScope.clientes}" >
                     <li>
@@ -24,6 +35,7 @@
         <c:if test="${uS.isAdmin()}">
             <div class="funcionarios">
                 <h2> Funcionarios </h2>
+                <button type="button" onclick="cadatrarFuncio()">CADASTRAR FUNCIONARIO</button>
                 <ol>
                     <c:forEach var="func" items="${applicationScope.funcionarios}" >
                         <li>

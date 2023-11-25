@@ -1,5 +1,6 @@
-package com.projeto.projetosistema.controller.funcionario.cliente;
+package com.projeto.projetosistema.controller.funcionario;
 
+import com.projeto.projetosistema.DAO.DAOInterface;
 import com.projeto.projetosistema.DAO.ErroDAO;
 import com.projeto.projetosistema.DAO.deployment.ClienteDAO;
 import com.projeto.projetosistema.DAO.deployment.EnderecoDAO;
@@ -8,6 +9,7 @@ import com.projeto.projetosistema.model.Cliente;
 import com.projeto.projetosistema.model.Endereco;
 import com.projeto.projetosistema.model.Funcionario;
 import com.projeto.projetosistema.utils.Tools;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "cadastrarFuncionario", value = "/cadastrarFuncionario")
 public class CadastrarFuncionario extends HttpServlet {
@@ -43,6 +46,7 @@ public class CadastrarFuncionario extends HttpServlet {
         String cidade = request.getParameter("cidade");
         String estado = request.getParameter("estado");
 
+        ServletContext aplicacao = getServletContext();
         HttpSession sessao = request.getSession();
         Funcionario userS = (Funcionario) sessao.getAttribute("userSessao");
         if (userS != null && userS.isFuncionario() && userS.isAdmin()) {
@@ -71,6 +75,8 @@ public class CadastrarFuncionario extends HttpServlet {
 
                                 funcNew.setEndereco(endereco);
                                 dao.inserir(funcNew);
+                                aplicacao.setAttribute("funcionarios",getFuncionarios());
+
                                 response.sendRedirect("index.jsp?msg=Funcionario Cadastrado com sucesso ");
 
                             } else {
@@ -92,5 +98,10 @@ public class CadastrarFuncionario extends HttpServlet {
             response.sendRedirect("index.jsp?msg=O funcionario pracisa estar logado");
         }
 
+    }
+    private List<Funcionario> getFuncionarios() throws ErroDAO {
+        DAOInterface<Funcionario> dao = new FuncionarioDAO();
+        List<Funcionario> fs = dao.buscar();
+        return fs;
     }
 }

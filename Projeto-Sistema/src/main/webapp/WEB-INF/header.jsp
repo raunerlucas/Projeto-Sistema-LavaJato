@@ -52,10 +52,6 @@
                 <c:choose>
                     <c:when test="${uS.isFuncionario()}">
                         <h4> Tipo - Funcionario </h4>
-                        <button type="button" onclick="cadatrarCleinte()">CADASTRAR CLIENTE</button>
-                        <c:if test="${uS.isAdmin()}">
-                            <button type="button" onclick="cadatrarFuncio()">CADASTRAR FUNCIONARIO</button>
-                        </c:if>
                     </c:when>
                     <c:otherwise>
                         <h4> Tipo - Cliente </h4>

@@ -1,6 +1,5 @@
 package com.projeto.projetosistema.model;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,8 +9,8 @@ import static com.projeto.projetosistema.model.Status.AGUARDANDO;
 public class OrdemServico {
     private Integer id;
     private Integer numeroOS;
-    private Date dataEmissao;
-    private Date previsaoTermino;
+    private String dataEmissao;
+    private String previsaoTermino;
     private boolean entregar;
     private Status status = AGUARDANDO;
     private String descricao;
@@ -24,7 +23,7 @@ public class OrdemServico {
     public OrdemServico() {
     }
 
-    public OrdemServico(Integer id, Integer numeroOS, Date dataEmissao, Date previsaoTermino, boolean entregar,
+    public OrdemServico(Integer id, Integer numeroOS, String dataEmissao, String previsaoTermino, boolean entregar,
                         Status status, String descricao, Float valorTotal, Funcionario funcionario, Cliente cliente,
                         Empresa empresa, List<Servico> servicosOrdem) {
         this.id = id;
@@ -41,18 +40,19 @@ public class OrdemServico {
         this.servicosOrdem = servicosOrdem;
     }
 
-    public OrdemServico(Integer numeroOS, Date dataEmissao, Date previsaoTermino, boolean entregar, Status status,
-                        String descricao, Float valorTotal, Funcionario funcionario, Cliente cliente, Empresa empresa) {
+    public OrdemServico(Integer numeroOS, String dataEmissao, String previsaoTermino, boolean entregar,
+                        String descricao, Float valorTotal, Funcionario funcionario, Cliente cliente, Empresa empresa, List<Servico> servicosOrdem) {
         this.numeroOS = numeroOS;
         this.dataEmissao = dataEmissao;
         this.previsaoTermino = previsaoTermino;
         this.entregar = entregar;
-        this.status = status;
         this.descricao = descricao;
         this.valorTotal = valorTotal;
         this.funcionario = funcionario;
         this.cliente = cliente;
         this.empresa = empresa;
+        this.servicosOrdem = servicosOrdem;
+
     }
 
 
@@ -125,19 +125,19 @@ public class OrdemServico {
         this.numeroOS = numeroOS;
     }
 
-    public Date getDataEmissao() {
+    public String getDataEmissao() {
         return dataEmissao;
     }
 
-    public void setDataEmissao(Date dataEmissao) {
+    public void setDataEmissao(String dataEmissao) {
         this.dataEmissao = dataEmissao;
     }
 
-    public Date getPrevisaoTermino() {
+    public String getPrevisaoTermino() {
         return previsaoTermino;
     }
 
-    public void setPrevisaoTermino(Date previsaoTermino) {
+    public void setPrevisaoTermino(String previsaoTermino) {
         this.previsaoTermino = previsaoTermino;
     }
 

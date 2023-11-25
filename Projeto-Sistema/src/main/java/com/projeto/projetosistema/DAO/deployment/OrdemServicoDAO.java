@@ -37,8 +37,8 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
             stm.setString(6, obj.getDescricao());
             stm.setBoolean(7, obj.isEntregar());
             stm.setString(8, obj.jsonCreate());
-            stm.setDate(9, obj.getDataEmissao());
-            stm.setDate(10, obj.getPrevisaoTermino());
+            stm.setString(9, obj.getDataEmissao());
+            stm.setString(10, obj.getPrevisaoTermino());
             stm.setFloat(11, obj.getValorTotal());
             stm.executeUpdate();
             ResultSet rs = stm.getGeneratedKeys();
@@ -84,8 +84,8 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
             stm.setString(6, obj.getDescricao());
             stm.setBoolean(7, obj.isEntregar());
             stm.setString(8, obj.jsonCreate());
-            stm.setDate(9, obj.getDataEmissao());
-            stm.setDate(10, obj.getPrevisaoTermino());
+            stm.setString(9, obj.getDataEmissao());
+            stm.setString(10, obj.getPrevisaoTermino());
             stm.setFloat(11, obj.getValorTotal());
             stm.setFloat(12, obj.getId());
             stm.executeUpdate();
@@ -128,8 +128,8 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
 
                 ordemServicos = new OrdemServico(rs.getInt("id"),
                         rs.getInt("numOS"),
-                        rs.getDate("dataEmissao"),
-                        rs.getDate("previsaoTermino"),
+                        rs.getString("dataEmissao"),
+                        rs.getString("previsaoTermino"),
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
@@ -177,8 +177,8 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
 
                 ordemServicos.add(new OrdemServico(rs.getInt("id"),
                         rs.getInt("numOS"),
-                        rs.getDate("dataEmissao"),
-                        rs.getDate("previsaoTermino"),
+                        rs.getString("dataEmissao"),
+                        rs.getString("previsaoTermino"),
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
@@ -224,8 +224,8 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                 OrdemServico ordemServico = new OrdemServico(
                         rs.getInt("id"),
                         rs.getInt("numOS"),
-                        rs.getDate("dataEmissao"),
-                        rs.getDate("previsaoTermino"),
+                        rs.getString("dataEmissao"),
+                        rs.getString("previsaoTermino"),
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
@@ -273,8 +273,8 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                 OrdemServico ordemServico = new OrdemServico(
                         rs.getInt("id"),
                         rs.getInt("numOS"),
-                        rs.getDate("dataEmissao"),
-                        rs.getDate("previsaoTermino"),
+                        rs.getString("dataEmissao"),
+                        rs.getString("previsaoTermino"),
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),

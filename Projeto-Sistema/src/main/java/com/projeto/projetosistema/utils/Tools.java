@@ -1,13 +1,17 @@
 package com.projeto.projetosistema.utils;
 
+import com.projeto.projetosistema.DAO.DAOInterface;
 import com.projeto.projetosistema.DAO.ErroDAO;
 import com.projeto.projetosistema.DAO.deployment.ClienteDAO;
 import com.projeto.projetosistema.DAO.deployment.EnderecoDAO;
 import com.projeto.projetosistema.DAO.deployment.FuncionarioDAO;
+import com.projeto.projetosistema.DAO.deployment.ServicoDAO;
 import com.projeto.projetosistema.model.Cliente;
 import com.projeto.projetosistema.model.Endereco;
 import com.projeto.projetosistema.model.Funcionario;
+import com.projeto.projetosistema.model.Servico;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tools {
@@ -67,4 +71,27 @@ public class Tools {
         return telefone.replaceAll("[()\\s-]", "");
     }
 
+    public static List<Servico> fixServicos(List<Servico> servicos) throws ErroDAO {
+        List<Servico> servicID = new ArrayList<>();
+        try {
+            ServicoDAO dao = new ServicoDAO();
+            for (Servico s: servicos) {
+                Servico toAtualizar = dao.buscar(s);
+                if (toAtualizar == null){
+                    dao.inserir(s);
+                }else if (toAtualizar.getPreco().equals(s.getPreco())){
+                    s.setId(toAtualizar.getId());
+                }else {
+                    s.setId(toAtualizar.getId());
+                    toAtualizar.setPreco(s.getPreco());
+                    dao.editar(toAtualizar);
+                }
+                servicID.add(s);
+            }
+            dao.close();
+        } catch (ErroDAO e) {
+            throw new RuntimeException(e);
+        }
+        return servicID;
+    }
 }

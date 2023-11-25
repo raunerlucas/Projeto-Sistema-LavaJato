@@ -43,7 +43,7 @@ public class ServicoDAO implements DAOInterface<Servico> {
     public void deletar(int id) throws ErroDAO {
         try {
             PreparedStatement stm = con.prepareStatement("DELETE FROM Servico WHERE id = ?");
-            stm.setInt(1,id);
+            stm.setInt(1, id);
             stm.executeUpdate();
             stm.close();
         } catch (SQLException e) {
@@ -54,7 +54,7 @@ public class ServicoDAO implements DAOInterface<Servico> {
     @Override
     public void editar(Servico obj) throws ErroDAO {
         try {
-            PreparedStatement stm = con.prepareStatement("UPDATE Sevico SET descricao = ?, preco = ? WHERE id = ?");
+            PreparedStatement stm = con.prepareStatement("UPDATE Servico SET descricao = ?, preco = ? WHERE id = ?");
             stm.setString(1, obj.getDescricao());
             stm.setFloat(2, obj.getPreco());
             stm.setInt(3, obj.getId());
@@ -70,6 +70,24 @@ public class ServicoDAO implements DAOInterface<Servico> {
         Servico sv = null;
         try {
             PreparedStatement stm = con.prepareStatement("SELECT * FROM Servico WHERE id = ?");
+            stm.setInt(1,id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                sv = new Servico(rs.getInt("id"),
+                        rs.getString("descricao"),
+                        rs.getFloat("preco"));
+            }
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+        return sv;
+    }
+
+    public Servico buscar(Servico sBuscar) throws ErroDAO {
+        Servico sv = null;
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM Servico WHERE descricao like ?");
+            stm.setString(1,sBuscar.getDescricao());
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 sv = new Servico(rs.getInt("id"),
@@ -88,10 +106,10 @@ public class ServicoDAO implements DAOInterface<Servico> {
         try {
             PreparedStatement stm = con.prepareStatement("SELECT * FROM Servico");
             ResultSet rs = stm.executeQuery();
-            while (rs.next()){
-             servicoList.add(new Servico(rs.getInt(1),
-                     rs.getString(2),
-                     rs.getFloat(3)));
+            while (rs.next()) {
+                servicoList.add(new Servico(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getFloat(3)));
             }
         } catch (SQLException e) {
             throw new ErroDAO(e);

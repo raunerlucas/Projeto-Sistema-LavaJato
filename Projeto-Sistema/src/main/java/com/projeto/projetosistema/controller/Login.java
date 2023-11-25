@@ -5,12 +5,8 @@ import java.util.List;
 
 import com.projeto.projetosistema.DAO.DAOInterface;
 import com.projeto.projetosistema.DAO.ErroDAO;
-import com.projeto.projetosistema.DAO.deployment.ClienteDAO;
-import com.projeto.projetosistema.DAO.deployment.EmpresaDAO;
-import com.projeto.projetosistema.DAO.deployment.FuncionarioDAO;
-import com.projeto.projetosistema.model.Cliente;
-import com.projeto.projetosistema.model.Empresa;
-import com.projeto.projetosistema.model.Funcionario;
+import com.projeto.projetosistema.DAO.deployment.*;
+import com.projeto.projetosistema.model.*;
 import com.projeto.projetosistema.utils.Tools;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.*;
@@ -39,9 +35,13 @@ public class Login extends HttpServlet {
                         aplicacao.setAttribute("empresa",getEmpresa());
 
                         aplicacao.setAttribute("clientes",getClientes());
-                        if (func.isAdmin())
-                            aplicacao.setAttribute("funcionarios",getFuncionarios());
-
+                        aplicacao.setAttribute("servicos",getServicos());
+                        if (func.isAdmin()) {
+                            aplicacao.setAttribute("funcionarios", getFuncionarios());
+                            aplicacao.setAttribute("ordemSevico",getOS());
+                        }else {
+                            aplicacao.setAttribute("ordemSevico",getOS(func));
+                        }
                         response.sendRedirect("index.jsp");
                     } else {
                         response.sendRedirect("index.jsp?msg=Funcionario não Encotrado");
@@ -52,6 +52,7 @@ public class Login extends HttpServlet {
                         sessao = request.getSession();
                         sessao.setAttribute("userSessao", clint);
                         aplicacao.setAttribute("empresa",getEmpresa());
+                        aplicacao.setAttribute("ordemSevico",getOS(clint));
 
                         response.sendRedirect("index.jsp");
                     } else {
@@ -86,6 +87,31 @@ public class Login extends HttpServlet {
         DAOInterface<Funcionario> dao = new FuncionarioDAO();
         List<Funcionario> fs = dao.buscar();
         return fs;
+    }
+    private List<Servico> getServicos() throws ErroDAO {
+        DAOInterface<Servico> dao = new ServicoDAO();
+        List<Servico> s = dao.buscar();
+        return s;
+    }
+
+    private List<OrdemServico> getOS(Funcionario userS) throws ErroDAO {
+        OrdemServicoDAO dao = new OrdemServicoDAO();
+        List<OrdemServico> os = dao.buscarPorFuncionario(userS);
+        dao.close();
+        return os;
+    }
+
+    private List<OrdemServico> getOS(Cliente userS) throws ErroDAO {
+        OrdemServicoDAO dao = new OrdemServicoDAO();
+        List<OrdemServico> os = dao.buscarPorCliente(userS);
+        dao.close();
+        return os;
+    }
+    private List<OrdemServico> getOS() throws ErroDAO {
+        DAOInterface<OrdemServico> dao = new OrdemServicoDAO();
+        List<OrdemServico> os = dao.buscar();
+        dao.close();
+        return os;
     }
 
 
