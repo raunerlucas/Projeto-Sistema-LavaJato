@@ -57,10 +57,10 @@ function removerServico(botao){
     label.removeChild(botao.previousElementSibling)
     label.removeChild(botao)
 }
-function addServico(evento){
-    evento.preventDefault();
+function addServico(botao){
     const input = `<input type="text" list="servicos" required name="servicoInput"
-       autocomplete="off" placeholder="Descricao -- valor" maxlength="25" >
+       autocomplete="off" placeholder="Descricao -- valor" maxlength="25"
+        value="${botao.previousElementSibling.value}">
        <button type="button" onclick="removerServico(this)"> <samp>-</samp> </button>`
     let label = document.getElementById("servicosOrdemInput")
     label.innerHTML += input;

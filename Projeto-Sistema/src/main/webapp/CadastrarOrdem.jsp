@@ -23,12 +23,12 @@
                     Seviços
                     <input type="text" list="servicos" required name="servicoInput"
                     autocomplete="off" placeholder="Descricao -- valor" maxlength="25" >
+                    <button type="button" onclick="addServico(this)"> <samp>+</samp> </button>
                     <datalist id="servicos">
                     <c:forEach var="ser" items="${applicationScope.servicos}" >
                         <option value="${ser.getDescricao()} -- ${ser.getPreco()}">
                             </c:forEach>
                     </datalist>
-                    <button type="button" onclick="addServico(event)"> <samp>+</samp> </button>
                 </label>
                 <label>
                     Descrição Veiculo:
