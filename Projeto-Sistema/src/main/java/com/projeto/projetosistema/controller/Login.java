@@ -36,13 +36,12 @@ public class Login extends HttpServlet {
 
                         aplicacao.setAttribute("clientes",getClientes());
                         aplicacao.setAttribute("servicos",getServicos());
-                        if (func.isAdmin()) {
+                        if (func.isAdmin())
                             aplicacao.setAttribute("funcionarios", getFuncionarios());
-                            aplicacao.setAttribute("ordemSevico",getOS());
-                        }else {
-                            aplicacao.setAttribute("ordemSevico",getOS(func));
-                        }
+
+                        aplicacao.setAttribute("ordemSevico",getOS(func));
                         response.sendRedirect("index.jsp");
+
                     } else {
                         response.sendRedirect("index.jsp?msg=Funcionario não Encotrado");
                     }
@@ -96,7 +95,11 @@ public class Login extends HttpServlet {
 
     private List<OrdemServico> getOS(Funcionario userS) throws ErroDAO {
         OrdemServicoDAO dao = new OrdemServicoDAO();
-        List<OrdemServico> os = dao.buscarPorFuncionario(userS);
+        List<OrdemServico> os = null;
+        if (userS.isAdmin())
+            os = dao.buscar();
+        else
+            os = dao.buscarPorFuncionario(userS);
         dao.close();
         return os;
     }
@@ -107,12 +110,5 @@ public class Login extends HttpServlet {
         dao.close();
         return os;
     }
-    private List<OrdemServico> getOS() throws ErroDAO {
-        DAOInterface<OrdemServico> dao = new OrdemServicoDAO();
-        List<OrdemServico> os = dao.buscar();
-        dao.close();
-        return os;
-    }
-
 
 }

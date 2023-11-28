@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @WebServlet(name = "cadastrarOS", value = "/cadastrarOS")
@@ -32,19 +33,25 @@ public class CadastrarOrdemServico extends HttpServlet {
         //login
         String[] servicoInputs = request.getParameterValues("servicoInput");
         String descricao = request.getParameter("descricao");
+        String veiculo = request.getParameter("veiculo");
         //endereco
         String dataPrevisao = request.getParameter("dataPrevisao");
         String entregar = request.getParameter("entregar");
         String valorTotal = request.getParameter("valorTotal");
 
+        var dform = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
         ServletContext aplicacao = getServletContext();
         HttpSession sessao = request.getSession();
         Funcionario userS = (Funcionario) sessao.getAttribute("userSessao");
         if (userS != null && userS.isFuncionario() && userS.isAdmin()) {
-            if (Tools.validaValor(clienteT) && Tools.validaValor(descricao) && Tools.validaValor(dataPrevisao) &&
+            if (Tools.validaValor(clienteT) && Tools.validaValor(descricao) && Tools.validaValor(veiculo) && Tools.validaValor(dataPrevisao) &&
                     Tools.validaValor(valorTotal)) {
-                OrdemServico osNew = new OrdemServico(9999,String.valueOf(LocalDate.now()),dataPrevisao,entregar.equals("sim"),
-                        descricao, Float.valueOf(valorTotal),null,null,null,null);
+                OrdemServico osNew = new OrdemServico(Integer.MAX_VALUE,
+                        LocalDate.now().format(dform),
+                        LocalDate.parse(dataPrevisao,DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                                .format(dform),entregar.equals("sim"),
+                        descricao,veiculo, Float.valueOf(valorTotal),null,null,null,null);
                 String numOS = "";
                 Funcionario func = (Funcionario) sessao.getAttribute("userSessao");
                 osNew.setFuncionario(func);
@@ -73,6 +80,7 @@ public class CadastrarOrdemServico extends HttpServlet {
 
                     aplicacao.setAttribute("servicos",getServicos());
                     aplicacao.setAttribute("ordemSevico",getOS(func));
+                    response.getWriter().println(osNew);
                     response.sendRedirect("index.jsp?msg=Ordem de Servico Cadastrada com sucesso!");
                 } catch (ErroDAO e) {
                     throw new RuntimeException(e);
@@ -108,7 +116,11 @@ public class CadastrarOrdemServico extends HttpServlet {
     }
     private List<OrdemServico> getOS(Funcionario userS) throws ErroDAO {
         OrdemServicoDAO dao = new OrdemServicoDAO();
-        List<OrdemServico> os = dao.buscarPorFuncionario(userS);
+        List<OrdemServico> os = null;
+        if (userS.isAdmin())
+            os = dao.buscar();
+        else
+            os = dao.buscarPorFuncionario(userS);
         dao.close();
         return os;
     }

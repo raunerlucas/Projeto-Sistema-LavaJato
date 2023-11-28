@@ -6,11 +6,11 @@
             <input type="hidden" name="tipo" value="f">
             <label>
                 Login
-                <input type="text" name="login" placeholder="Seu Login">
+                <input type="text" required name="login" placeholder="Seu Login">
             </label>
             <label>
                 Senha
-                <input type="password" name="senha" placeholder="Sua Senha">
+                <input type="password" required name="senha" placeholder="Sua Senha">
             </label>
             <input type="submit" value="Logar">
         </form>

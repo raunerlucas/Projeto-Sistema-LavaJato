@@ -22,7 +22,7 @@
                 <label id="servicosOrdemInput">
                     Seviços
                     <input type="text" list="servicos" required name="servicoInput"
-                    autocomplete="off" placeholder="Descricao -- valor" maxlength="25" >
+                    autocomplete="off" placeholder="Descricao -- valor" maxlength="50" onchange="somarValor(this)" >
                     <button type="button" onclick="addServico(this)"> <samp>+</samp> </button>
                     <datalist id="servicos">
                     <c:forEach var="ser" items="${applicationScope.servicos}" >
@@ -38,6 +38,17 @@ Placa: ***;
 Cor: ***;
 OBS: ***;
                                     </textarea>
+                </label>
+                <label>
+                    Veiculo
+                    <select name="veiculo" required>
+                        <option value="carro">Carro de Passeio</option>
+                        <option value="suv">SUV / Crossover</option>
+                        <option value="caminhao">Caminhão</option>
+                        <option value="moto">Motocicleta</option>
+                        <option value="van">Van</option>
+                        <option value="frota">Veículo de Frota</option>
+                    </select>
                 </label>
             </fieldset>
             <fieldset>
@@ -58,7 +69,7 @@ OBS: ***;
                 </label>
                 <label>
                     Valor Total
-                    <input required type="number" name="valorTotal">
+                    <input required type="number" name="valorTotal" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                 </label>
             </fieldset>
             <input type="submit" value="CRIAR">

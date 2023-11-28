@@ -14,6 +14,7 @@ public class OrdemServico {
     private boolean entregar;
     private Status status = AGUARDANDO;
     private String descricao;
+    private String veiculo;
     private Float valorTotal;
     private Funcionario funcionario;
     private Cliente cliente;
@@ -24,7 +25,7 @@ public class OrdemServico {
     }
 
     public OrdemServico(Integer id, Integer numeroOS, String dataEmissao, String previsaoTermino, boolean entregar,
-                        Status status, String descricao, Float valorTotal, Funcionario funcionario, Cliente cliente,
+                        Status status, String descricao, String veiculo, Float valorTotal, Funcionario funcionario, Cliente cliente,
                         Empresa empresa, List<Servico> servicosOrdem) {
         this.id = id;
         this.numeroOS = numeroOS;
@@ -33,6 +34,7 @@ public class OrdemServico {
         this.entregar = entregar;
         this.status = status;
         this.descricao = descricao;
+        this.veiculo = veiculo;
         this.valorTotal = valorTotal;
         this.funcionario = funcionario;
         this.cliente = cliente;
@@ -41,12 +43,13 @@ public class OrdemServico {
     }
 
     public OrdemServico(Integer numeroOS, String dataEmissao, String previsaoTermino, boolean entregar,
-                        String descricao, Float valorTotal, Funcionario funcionario, Cliente cliente, Empresa empresa, List<Servico> servicosOrdem) {
+                        String descricao,String veiculo, Float valorTotal, Funcionario funcionario, Cliente cliente, Empresa empresa, List<Servico> servicosOrdem) {
         this.numeroOS = numeroOS;
         this.dataEmissao = dataEmissao;
         this.previsaoTermino = previsaoTermino;
         this.entregar = entregar;
         this.descricao = descricao;
+        this.veiculo = veiculo;
         this.valorTotal = valorTotal;
         this.funcionario = funcionario;
         this.cliente = cliente;
@@ -89,6 +92,7 @@ public class OrdemServico {
                 ", entregar=" + entregar +
                 ", status=" + status +
                 ", descricao=" + descricao +
+                ", veiculo=" + veiculo +
                 ", valorTotal=" + valorTotal +
                 ", funcionario=" + funcionario +
                 ", cliente=" + cliente +
@@ -163,6 +167,14 @@ public class OrdemServico {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(String veiculo) {
+        this.veiculo = veiculo;
     }
 
     public Float getValorTotal() {

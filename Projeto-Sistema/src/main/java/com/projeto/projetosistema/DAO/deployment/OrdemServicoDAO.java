@@ -27,19 +27,20 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
         // Setar a empresa pelo contesto da aplicacao
         try {
             PreparedStatement stm = con.prepareStatement("INSERT INTO OrdemServico " +
-                    "(id_funcionario, id_cliente, id_empresa, numOS, status, observacao, entregar, servicosOrdem, dataEmissao, previsaoTermino, ValorTotal)\n" +
-                    "VALUES (? , ?, ?, ?, ?, ?, ?, ?::jsonb, ?, ?, ?);", 1);
+                    "(id_funcionario, id_cliente, id_empresa, numOS, status, observacao, veiculo, entregar, servicosOrdem, dataEmissao, previsaoTermino, ValorTotal)\n" +
+                    "VALUES (?, ?, ?, ?, ?, ?,?, ?, ?::jsonb, ?, ?, ?);", 1);
             stm.setInt(1, obj.getFuncionario().getId());
             stm.setInt(2, obj.getClinte().getId());
             stm.setInt(3, obj.getEmpresa().getId());
             stm.setInt(4, obj.getNumeroOS());
             stm.setString(5, obj.getStatus().name());
             stm.setString(6, obj.getDescricao());
-            stm.setBoolean(7, obj.isEntregar());
-            stm.setString(8, obj.jsonCreate());
-            stm.setString(9, obj.getDataEmissao());
-            stm.setString(10, obj.getPrevisaoTermino());
-            stm.setFloat(11, obj.getValorTotal());
+            stm.setString(7, obj.getDescricao());
+            stm.setBoolean(8, obj.isEntregar());
+            stm.setString(9, obj.jsonCreate());
+            stm.setString(10, obj.getDataEmissao());
+            stm.setString(11, obj.getPrevisaoTermino());
+            stm.setFloat(12, obj.getValorTotal());
             stm.executeUpdate();
             ResultSet rs = stm.getGeneratedKeys();
             if (rs.next()) {
@@ -73,7 +74,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
     public void editar(OrdemServico obj) throws ErroDAO {
         try {
             PreparedStatement stm = con.prepareStatement("UPDATE OrdemServico " +
-                    "SET  id_funcionario = ?, id_cliente = ?, id_empresa = ?, numOS = ?, status = ?, observacao = ?," +
+                    "SET  id_funcionario = ?, id_cliente = ?, id_empresa = ?, numOS = ?, status = ?, observacao = ?, veiculo = ?," +
                     " entregar = ?, servicosOrdem  = ?::jsonb, dataEmissao = ?, previsaoTermino = ?, ValorTotal = ? " +
                     "WHERE id = ?;");
             stm.setInt(1, obj.getFuncionario().getId());
@@ -82,12 +83,13 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
             stm.setInt(4, obj.getNumeroOS());
             stm.setString(5, obj.getStatus().name());
             stm.setString(6, obj.getDescricao());
-            stm.setBoolean(7, obj.isEntregar());
-            stm.setString(8, obj.jsonCreate());
-            stm.setString(9, obj.getDataEmissao());
-            stm.setString(10, obj.getPrevisaoTermino());
-            stm.setFloat(11, obj.getValorTotal());
-            stm.setFloat(12, obj.getId());
+            stm.setString(7, obj.getVeiculo());
+            stm.setBoolean(8, obj.isEntregar());
+            stm.setString(9, obj.jsonCreate());
+            stm.setString(10, obj.getDataEmissao());
+            stm.setString(11, obj.getPrevisaoTermino());
+            stm.setFloat(12, obj.getValorTotal());
+            stm.setFloat(13, obj.getId());
             stm.executeUpdate();
             stm.close();
         } catch (SQLException e) {
@@ -133,6 +135,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
+                        rs.getString("veiculo"),
                         rs.getFloat("ValorTotal"),
                         funcionario,
                         cliente,
@@ -182,6 +185,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
+                        rs.getString("veiculo"),
                         rs.getFloat("ValorTotal"),
                         funcionario,
                         cliente,
@@ -211,6 +215,11 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                 List<Servico> servicosDaOrdem = new ArrayList<>();
                 DAOInterface<Servico> daoS = new ServicoDAO();
 
+                DAOInterface<Cliente> daoC = new ClienteDAO();
+                obj = daoC.buscar(rs.getInt("id_cliente"));
+                daoC.close();
+
+
                 // Obtenha a lista de serviços a partir do JSONB
                 JSONArray jsonServicos = new JSONArray(rs.getString("servicosOrdem"));
                 for (int i = 0; i < jsonServicos.length(); i++) {
@@ -229,6 +238,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
+                        rs.getString("veiculo"),
                         rs.getFloat("ValorTotal"),
                         funcionario,
                         obj,
@@ -278,6 +288,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
+                        rs.getString("veiculo"),
                         rs.getFloat("ValorTotal"),
                         obj,
                         cliente,

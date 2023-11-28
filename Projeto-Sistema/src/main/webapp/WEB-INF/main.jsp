@@ -1,19 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div id="popApps">
+</div>
 <section>
     <c:set var="uS" value="${sessionScope.userSessao}"/>
-    <div id="popApps">
-    </div>
     <div class="ordens-servico">
         <h2> Ordem de Servico </h2>
         <c:if test="${uS.isFuncionario()}">
-            <a href="CadastrarOrdem.jsp">NOVA</a>
+            <a href="CadastrarOrdem.jsp"><button>NOVA</button></a>
         </c:if>
         <c:forEach var="ordem" items="${applicationScope.ordemSevico}" >
             <li>
-                <button>
-                    <span>Numero: ${ordem.getNumeroOS()}</span>
-                </button>
+                <a href="viewOS.jsp?numOS=${ordem.getNumeroOS()}">
+                    <button>
+                        <span>Numero: ${ordem.getNumeroOS()}</span><br>
+                        <span>Status: ${ordem.getStatus()}</span>
+                    </button>
+                </a>
             </li>
         </c:forEach>
     </div>
@@ -25,8 +28,8 @@
                 <c:forEach var="cli" items="${applicationScope.clientes}" >
                     <li>
                         <button>
-                            <span>Nome: ${cli.getNome()}</span>
-                            <span>cpf: ${cli.getCPF()}</span>
+                            <span>Nome: ${cli.getNome()}</span><br>
+                            <span>CPF: ${cli.getCPF()}</span>
                         </button>
                     </li>
                 </c:forEach>
@@ -40,8 +43,8 @@
                     <c:forEach var="func" items="${applicationScope.funcionarios}" >
                         <li>
                             <button>
-                                <span>Nome: ${func.getNome()}</span>
-                                <span>cpf: ${func.getCPF()}</span>
+                                <span>Nome: ${func.getNome()}</span><br>
+                                <span>CPF: ${func.getCPF()}</span><br>
                                 <span>Admin: ${func.isAdmin() ? "Sim" : "Não"}</span>
                             </button>
                         </li>
