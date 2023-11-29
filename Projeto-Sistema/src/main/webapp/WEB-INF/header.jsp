@@ -34,7 +34,7 @@
             <c:if test="${sessionScope.userSessao != null}">
                 <ul>
                     <li><a href="logout"><button>SAIR</button></a></li>
-                    <li><button type="button" onclick="editarUserSessao(${sessionScope.userSessao})">EDITAR</button></li>
+                    <li><button type="button" onclick="editarUserSessao()">EDITAR</button></li>
                 </ul>
             </c:if>
         </nav>

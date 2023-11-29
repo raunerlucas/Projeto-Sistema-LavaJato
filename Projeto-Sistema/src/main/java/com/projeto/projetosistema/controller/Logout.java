@@ -35,15 +35,4 @@ public class Logout extends HttpServlet {
             response.sendRedirect("index.jsp?msg=Ninguem Logado");
         }
     }
-
-    public void destroy() {
-    }
-
-    private Empresa pegaEmpresa() throws ErroDAO {
-        DAOInterface<Empresa> dao = new EmpresaDAO();
-        Empresa e = dao.buscar(1);
-        return e;
-    }
-
-
 }

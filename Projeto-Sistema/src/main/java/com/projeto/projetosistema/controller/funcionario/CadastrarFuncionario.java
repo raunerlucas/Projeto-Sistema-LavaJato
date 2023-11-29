@@ -75,7 +75,7 @@ public class CadastrarFuncionario extends HttpServlet {
 
                                 funcNew.setEndereco(endereco);
                                 dao.inserir(funcNew);
-                                aplicacao.setAttribute("funcionarios",getFuncionarios());
+                                aplicacao.setAttribute("funcionarios",Tools.getFuncionarios());
 
                                 response.sendRedirect("index.jsp?msg=Funcionario Cadastrado com sucesso ");
 
@@ -98,10 +98,5 @@ public class CadastrarFuncionario extends HttpServlet {
             response.sendRedirect("index.jsp?msg=O funcionario pracisa estar logado");
         }
 
-    }
-    private List<Funcionario> getFuncionarios() throws ErroDAO {
-        DAOInterface<Funcionario> dao = new FuncionarioDAO();
-        List<Funcionario> fs = dao.buscar();
-        return fs;
     }
 }

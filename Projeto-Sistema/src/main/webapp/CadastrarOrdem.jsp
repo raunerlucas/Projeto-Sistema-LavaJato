@@ -5,12 +5,13 @@
 <c:choose>
     <c:when test="${uS.isFuncionario()}">
         <h3>Criar nova Ordem de Servico</h3>
-        <a href="index.jsp">Voltar</a>
+        <a href="index.jsp"><button>Voltar</button></a>
         <form method="post" action="cadastrarOS">
             <fieldset>
                 <label id="clientesLabel">
                     Cliente
-                    <input required type="text" name="cliente" autocomplete="off" placeholder=" Nome  -- CPF" maxlength="25" list="clientes" oninput="haveCliente(this)">
+                    <input required type="text" name="cliente" autocomplete="off"
+                           placeholder=" Nome  -- CPF" maxlength="25" list="clientes" oninput="haveCliente(this)">
                     <datalist id="clientes">
                         <c:forEach var="cli" items="${applicationScope.clientes}" >
                             <option value="${cli.getNome()} -- ${cli.getCPF()}">
@@ -21,14 +22,11 @@
             <fieldset>
                 <label id="servicosOrdemInput">
                     Seviços
-                    <input type="text" list="servicos" required name="servicoInput"
-                    autocomplete="off" placeholder="Descricao -- valor" maxlength="50" onchange="somarValor(this)" >
-                    <button type="button" onclick="addServico(this)"> <samp>+</samp> </button>
-                    <datalist id="servicos">
-                    <c:forEach var="ser" items="${applicationScope.servicos}" >
-                        <option value="${ser.getDescricao()} -- ${ser.getPreco()}">
-                            </c:forEach>
-                    </datalist>
+                    <select name="servicoInput" size="5" multiple required onclick="somarValor(this)">
+                        <c:forEach var="ser" items="${applicationScope.servicos}" >
+                            <option value="${ser.getDescricao()} -- ${ser.getPreco()}">${ser.getDescricao()}</option>
+                        </c:forEach>
+                    </select>
                 </label>
                 <label>
                     Descrição Veiculo:
@@ -69,7 +67,7 @@ OBS: ***;
                 </label>
                 <label>
                     Valor Total
-                    <input required type="number" name="valorTotal" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <input type="number" name="valorTotal" readonly>
                 </label>
             </fieldset>
             <input type="submit" value="CRIAR">

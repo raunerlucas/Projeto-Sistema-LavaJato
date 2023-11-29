@@ -72,7 +72,7 @@ public class CadastrarCliente extends HttpServlet {
 
                                 clienteNew.setEndereco(endereco);
                                 dao.inserir(clienteNew);
-                                aplicacao.setAttribute("clientes",getClientes());
+                                aplicacao.setAttribute("clientes",Tools.getClientes());
 
                                 response.sendRedirect("index.jsp?msg=Cliente Cadastrado com sucesso");
 
@@ -95,11 +95,5 @@ public class CadastrarCliente extends HttpServlet {
             response.sendRedirect("index.jsp?msg=O funcionario pracisa estar logado");
         }
 
-    }
-
-    private List<Cliente> getClientes() throws ErroDAO {
-        DAOInterface<Cliente> dao = new ClienteDAO();
-        List<Cliente> cl = dao.buscar();
-        return cl;
     }
 }

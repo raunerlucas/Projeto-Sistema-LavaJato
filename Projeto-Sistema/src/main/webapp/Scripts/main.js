@@ -92,15 +92,44 @@ function formatarTelefone(mascara, documento) {
 
 function somarValor(botao){
     let inpValt = document.getElementsByName("valorTotal").item(0);
-    let valtinpt = parseFloat(botao.value.split(" -- ")[1]);
-    if (inpValt.value > 0) {
-        let valor = parseFloat(inpValt.value) + valtinpt;
-        inpValt.value = valor;
-    } else {
-        inpValt.value = valtinpt;
+    let valor = 0;
+    for (const s of botao.children) {
+        if (s.selected){
+            valor += parseFloat(s.value.split(" -- ")[1])
+        }
     }
+    inpValt.value = valor
 }
 
+function editarUserSessao(user){
+}
+function editarServico(botao){
+    let form = document.forms[0];
+    form.action = "editarS";
+    if (document.getElementById("cancEdit") == null){
+        form.innerHTML += `<button type="button" id="cancEdit" onclick="restFormSer()">Cancelar</button>`
+    }
+    form[3].value = "Editar";
+    form[2].value = `${botao.value}`;
+
+    const dataS = botao.parentElement.parentElement.cells;
+    form[0].value = dataS[0].textContent;
+    form[0].placeholder = dataS[0].textContent;
+    form[1].value = parseFloat(dataS[1].textContent);
+    form[1].placeholder = parseFloat(dataS[1].textContent);
+}
+function restFormSer(){
+    let form = document.forms[0];
+    form.action = "cadastrarS";
+    form[3].value = "Cadastrar";
+    form[0].value = '';
+    form[0].placeholder = " Descrição";
+    form[1].value = '';
+    form[1].placeholder = " Preço";
+    form[2].value = '';
+
+    form.removeChild(document.getElementById("cancEdit"));
+}
 
 async function buscarCep(i) {
     if (i.value.length === 8) {

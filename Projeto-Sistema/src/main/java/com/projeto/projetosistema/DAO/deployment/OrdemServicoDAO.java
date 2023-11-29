@@ -27,8 +27,8 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
         // Setar a empresa pelo contesto da aplicacao
         try {
             PreparedStatement stm = con.prepareStatement("INSERT INTO OrdemServico " +
-                    "(id_funcionario, id_cliente, id_empresa, numOS, status, observacao, veiculo, entregar, servicosOrdem, dataEmissao, previsaoTermino, ValorTotal)\n" +
-                    "VALUES (?, ?, ?, ?, ?, ?,?, ?, ?::jsonb, ?, ?, ?);", 1);
+                    "(id_funcionario, id_cliente, id_empresa, numOS, status, observacao, veiculo, entregar, servicosOrdem, dataEmissao, previsaoTermino)\n" +
+                    "VALUES (?, ?, ?, ?, ?, ?,?, ?, ?::jsonb, ?, ?);", 1);
             stm.setInt(1, obj.getFuncionario().getId());
             stm.setInt(2, obj.getClinte().getId());
             stm.setInt(3, obj.getEmpresa().getId());
@@ -40,7 +40,6 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
             stm.setString(9, obj.jsonCreate());
             stm.setString(10, obj.getDataEmissao());
             stm.setString(11, obj.getPrevisaoTermino());
-            stm.setFloat(12, obj.getValorTotal());
             stm.executeUpdate();
             ResultSet rs = stm.getGeneratedKeys();
             if (rs.next()) {
@@ -75,7 +74,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
         try {
             PreparedStatement stm = con.prepareStatement("UPDATE OrdemServico " +
                     "SET  id_funcionario = ?, id_cliente = ?, id_empresa = ?, numOS = ?, status = ?, observacao = ?, veiculo = ?," +
-                    " entregar = ?, servicosOrdem  = ?::jsonb, dataEmissao = ?, previsaoTermino = ?, ValorTotal = ? " +
+                    " entregar = ?, servicosOrdem  = ?::jsonb, dataEmissao = ?, previsaoTermino = ? " +
                     "WHERE id = ?;");
             stm.setInt(1, obj.getFuncionario().getId());
             stm.setInt(2, obj.getClinte().getId());
@@ -88,8 +87,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
             stm.setString(9, obj.jsonCreate());
             stm.setString(10, obj.getDataEmissao());
             stm.setString(11, obj.getPrevisaoTermino());
-            stm.setFloat(12, obj.getValorTotal());
-            stm.setFloat(13, obj.getId());
+            stm.setFloat(12, obj.getId());
             stm.executeUpdate();
             stm.close();
         } catch (SQLException e) {
@@ -136,7 +134,6 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
                         rs.getString("veiculo"),
-                        rs.getFloat("ValorTotal"),
                         funcionario,
                         cliente,
                         null,
@@ -186,7 +183,6 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
                         rs.getString("veiculo"),
-                        rs.getFloat("ValorTotal"),
                         funcionario,
                         cliente,
                         null,
@@ -239,7 +235,6 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
                         rs.getString("veiculo"),
-                        rs.getFloat("ValorTotal"),
                         funcionario,
                         obj,
                         null,
@@ -289,7 +284,6 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
                         rs.getString("veiculo"),
-                        rs.getFloat("ValorTotal"),
                         obj,
                         cliente,
                         null,

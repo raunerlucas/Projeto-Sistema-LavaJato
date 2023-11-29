@@ -10,12 +10,12 @@
                 <c:set var="osView" value="${ordem}"/>
             </c:if>
         </c:forEach>
-        <a href="index.jsp">Voltar</a>
+        <a href="index.jsp"><button>Voltar</button></a>
         <c:if test="${uS.isFuncionario()}">
-            <a><button>Status</button></a>
+            <a href="statusOS?id=${osView.getId()}" ><button>Status</button></a>
             <a><button>Editar</button></a>
             <c:if test="${uS.isAdmin()}">
-                <a><button>Deletar</button></a>
+                <a href="deletarOS?id=${osView.getId()}" ><button>Deletar</button></a>
             </c:if>
         </c:if>
         <div>

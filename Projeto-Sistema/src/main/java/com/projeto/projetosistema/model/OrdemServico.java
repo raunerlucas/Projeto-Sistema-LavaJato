@@ -15,7 +15,6 @@ public class OrdemServico {
     private Status status = AGUARDANDO;
     private String descricao;
     private String veiculo;
-    private Float valorTotal;
     private Funcionario funcionario;
     private Cliente cliente;
     private Empresa empresa;
@@ -25,7 +24,7 @@ public class OrdemServico {
     }
 
     public OrdemServico(Integer id, Integer numeroOS, String dataEmissao, String previsaoTermino, boolean entregar,
-                        Status status, String descricao, String veiculo, Float valorTotal, Funcionario funcionario, Cliente cliente,
+                        Status status, String descricao, String veiculo, Funcionario funcionario, Cliente cliente,
                         Empresa empresa, List<Servico> servicosOrdem) {
         this.id = id;
         this.numeroOS = numeroOS;
@@ -35,7 +34,6 @@ public class OrdemServico {
         this.status = status;
         this.descricao = descricao;
         this.veiculo = veiculo;
-        this.valorTotal = valorTotal;
         this.funcionario = funcionario;
         this.cliente = cliente;
         this.empresa = empresa;
@@ -43,14 +41,13 @@ public class OrdemServico {
     }
 
     public OrdemServico(Integer numeroOS, String dataEmissao, String previsaoTermino, boolean entregar,
-                        String descricao,String veiculo, Float valorTotal, Funcionario funcionario, Cliente cliente, Empresa empresa, List<Servico> servicosOrdem) {
+                        String descricao,String veiculo, Funcionario funcionario, Cliente cliente, Empresa empresa, List<Servico> servicosOrdem) {
         this.numeroOS = numeroOS;
         this.dataEmissao = dataEmissao;
         this.previsaoTermino = previsaoTermino;
         this.entregar = entregar;
         this.descricao = descricao;
         this.veiculo = veiculo;
-        this.valorTotal = valorTotal;
         this.funcionario = funcionario;
         this.cliente = cliente;
         this.empresa = empresa;
@@ -93,7 +90,6 @@ public class OrdemServico {
                 ", status=" + status +
                 ", descricao=" + descricao +
                 ", veiculo=" + veiculo +
-                ", valorTotal=" + valorTotal +
                 ", funcionario=" + funcionario +
                 ", cliente=" + cliente +
                 ", empresa=" + empresa +
@@ -178,11 +174,11 @@ public class OrdemServico {
     }
 
     public Float getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(Float valorTotal) {
-        this.valorTotal = valorTotal;
+        Float valor = 0F;
+        for (Servico sv: servicosOrdem) {
+            valor += sv.getPreco();
+        }
+        return valor;
     }
 
     public Funcionario getFuncionario() {

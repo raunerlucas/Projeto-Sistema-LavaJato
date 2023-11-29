@@ -37,7 +37,6 @@ public class CadastrarOrdemServico extends HttpServlet {
         //endereco
         String dataPrevisao = request.getParameter("dataPrevisao");
         String entregar = request.getParameter("entregar");
-        String valorTotal = request.getParameter("valorTotal");
 
         var dform = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -45,13 +44,14 @@ public class CadastrarOrdemServico extends HttpServlet {
         HttpSession sessao = request.getSession();
         Funcionario userS = (Funcionario) sessao.getAttribute("userSessao");
         if (userS != null && userS.isFuncionario() && userS.isAdmin()) {
-            if (Tools.validaValor(clienteT) && Tools.validaValor(descricao) && Tools.validaValor(veiculo) && Tools.validaValor(dataPrevisao) &&
-                    Tools.validaValor(valorTotal)) {
+            if (Tools.validaValor(clienteT) && Tools.validaValor(descricao)
+                    && Tools.validaValor(veiculo) && Tools.validaValor(dataPrevisao)) {
+
                 OrdemServico osNew = new OrdemServico(Integer.MAX_VALUE,
                         LocalDate.now().format(dform),
                         LocalDate.parse(dataPrevisao,DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                                 .format(dform),entregar.equals("sim"),
-                        descricao,veiculo, Float.valueOf(valorTotal),null,null,null,null);
+                        descricao,veiculo, null,null,null,null);
                 String numOS = "";
                 Funcionario func = (Funcionario) sessao.getAttribute("userSessao");
                 osNew.setFuncionario(func);
@@ -78,14 +78,12 @@ public class CadastrarOrdemServico extends HttpServlet {
                     daoOS.editar(osNew);
                     daoOS.close();
 
-                    aplicacao.setAttribute("servicos",getServicos());
-                    aplicacao.setAttribute("ordemSevico",getOS(func));
-                    response.getWriter().println(osNew);
+                    aplicacao.setAttribute("ordemSevico",Tools.getOS(func));
+
                     response.sendRedirect("index.jsp?msg=Ordem de Servico Cadastrada com sucesso!");
                 } catch (ErroDAO e) {
                     throw new RuntimeException(e);
                 }
-                response.getWriter().println(osNew);
 
             } else {
                 response.sendRedirect("CadastrarOrdem.jsp?msg=Faltam dados para cadastra a OS");
@@ -108,21 +106,6 @@ public class CadastrarOrdemServico extends HttpServlet {
     private String getCPF(String c){
         return c.split(" -- ")[1];
     }
-    private List<Servico> getServicos() throws ErroDAO {
-        DAOInterface<Servico> dao = new ServicoDAO();
-        List<Servico> s = dao.buscar();
-        dao.close();
-        return s;
-    }
-    private List<OrdemServico> getOS(Funcionario userS) throws ErroDAO {
-        OrdemServicoDAO dao = new OrdemServicoDAO();
-        List<OrdemServico> os = null;
-        if (userS.isAdmin())
-            os = dao.buscar();
-        else
-            os = dao.buscarPorFuncionario(userS);
-        dao.close();
-        return os;
-    }
+
 }
 

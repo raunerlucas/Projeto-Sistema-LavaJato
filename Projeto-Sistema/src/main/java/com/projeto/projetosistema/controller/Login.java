@@ -34,12 +34,11 @@ public class Login extends HttpServlet {
                         sessao.setAttribute("userSessao", func);
                         aplicacao.setAttribute("empresa",getEmpresa());
 
-                        aplicacao.setAttribute("clientes",getClientes());
-                        aplicacao.setAttribute("servicos",getServicos());
+                        aplicacao.setAttribute("clientes",Tools.getClientes());
+                        aplicacao.setAttribute("servicos",Tools.getServicos());
                         if (func.isAdmin())
-                            aplicacao.setAttribute("funcionarios", getFuncionarios());
-
-                        aplicacao.setAttribute("ordemSevico",getOS(func));
+                            aplicacao.setAttribute("funcionarios", Tools.getFuncionarios());
+                        aplicacao.setAttribute("ordemSevico",Tools.getOS(func));
                         response.sendRedirect("index.jsp");
 
                     } else {
@@ -68,40 +67,11 @@ public class Login extends HttpServlet {
         }
     }
 
-    public void destroy() {
-    }
 
     private Empresa getEmpresa() throws ErroDAO {
         DAOInterface<Empresa> dao = new EmpresaDAO();
         Empresa e = dao.buscar(1);
         return e;
-    }
-
-    private List<Cliente> getClientes() throws ErroDAO {
-        DAOInterface<Cliente> dao = new ClienteDAO();
-        List<Cliente> cl = dao.buscar();
-        return cl;
-    }
-    private List<Funcionario> getFuncionarios() throws ErroDAO {
-        DAOInterface<Funcionario> dao = new FuncionarioDAO();
-        List<Funcionario> fs = dao.buscar();
-        return fs;
-    }
-    private List<Servico> getServicos() throws ErroDAO {
-        DAOInterface<Servico> dao = new ServicoDAO();
-        List<Servico> s = dao.buscar();
-        return s;
-    }
-
-    private List<OrdemServico> getOS(Funcionario userS) throws ErroDAO {
-        OrdemServicoDAO dao = new OrdemServicoDAO();
-        List<OrdemServico> os = null;
-        if (userS.isAdmin())
-            os = dao.buscar();
-        else
-            os = dao.buscarPorFuncionario(userS);
-        dao.close();
-        return os;
     }
 
     private List<OrdemServico> getOS(Cliente userS) throws ErroDAO {

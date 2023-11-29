@@ -86,7 +86,7 @@ public class ServicoDAO implements DAOInterface<Servico> {
     public Servico buscar(Servico sBuscar) throws ErroDAO {
         Servico sv = null;
         try {
-            PreparedStatement stm = con.prepareStatement("SELECT * FROM Servico WHERE descricao like ?");
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM Servico WHERE descricao = ?");
             stm.setString(1,sBuscar.getDescricao());
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {

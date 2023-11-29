@@ -8,6 +8,9 @@
         <h2> Ordem de Servico </h2>
         <c:if test="${uS.isFuncionario()}">
             <a href="CadastrarOrdem.jsp"><button>NOVA</button></a>
+            <c:if test="${uS.isAdmin()}">
+                <a href="Servicos.jsp"><button>SERVIÇOS</button></a>
+            </c:if>
         </c:if>
         <c:forEach var="ordem" items="${applicationScope.ordemSevico}" >
             <li>
