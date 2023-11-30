@@ -12,8 +12,8 @@
         </c:forEach>
         <a href="index.jsp"><button>Voltar</button></a>
         <c:if test="${uS.isFuncionario()}">
-            <a href="statusOS?id=${osView.getId()}" ><button>Status</button></a>
-            <a><button>Editar</button></a>
+            <a href="statusOS?id=${osView.getId()}"><button>Status</button></a>
+            <a><button onclick="mostraredit()">Editar</button></a>
             <c:if test="${uS.isAdmin()}">
                 <a href="deletarOS?id=${osView.getId()}" ><button>Deletar</button></a>
             </c:if>
@@ -25,11 +25,8 @@
             <h2>Previsão de Termino [[ ${osView.getPrevisaoTermino()} ]] </h2>
             <h2>Valor Total: ${osView.getValorTotal()}</h2>
         </div>
-<%--        <p>${osView.toString()}</p>--%>
-        <form id="formViewOS">
-            <input type="hidden" name="id" value="${osView.getId()}">
-            <input type="hidden" name="numeroOrdem" value="${osView.getNumeroOS()}">
-            <fieldset>
+        <form action="editarOS" method="post">
+        <fieldset>
                 <div>
                     <h2>Cliente: </h2>
                     <h3>Nome: ${osView.getClinte().getNome()} ${osView.getClinte().getSobrenome()}</h3>
@@ -87,6 +84,18 @@
                     </h3>
                     <h2>Valor Total: ${osView.getValorTotal()}</h2>
                 </div>
+            </fieldset>
+            <fieldset id="elementoOculto" style="display: none">
+                <a><button onclick="mostraredit()">Cancelar</button></a>
+                <label id="servicosOrdemInput">
+                    Seviços
+                    <select name="servicoInput" size="5" multiple required onclick="somarValor(this)">
+                        <c:forEach var="ser" items="${applicationScope.servicos}" >
+                            <option value="${ser.getDescricao()} -- ${ser.getPreco()}">${ser.getDescricao()}</option>
+                        </c:forEach>
+                    </select>
+                </label>
+                <input type="hidden" readonly name="id" value="${osView.getId()}">
             </fieldset>
         </form>
     </c:when>

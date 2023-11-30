@@ -51,21 +51,23 @@ function haveCliente(i) {
         }
     }
 }
-function removerServico(botao){
-    let label = document.getElementById("servicosOrdemInput")
-    let valorR = parseFloat(botao.previousElementSibling.value.split(" -- ")[1]);
-    let inpValt = document.getElementsByName("valorTotal").item(0);
-    inpValt.value = parseFloat(inpValt.value) - valorR;
-    label.removeChild(botao.previousElementSibling);
-    label.removeChild(botao)
+
+function editarOrdemServico(){
+    let divE = document.getElementById("elementoOculto")
+    const dataBase = document.forms[0][2].children[0].children
+    divE.innerHTML += formOSEdit(dataBase);
 }
-function addServico(botao){
-    const input = `<input type="text" list="servicos" required name="servicoInput"
-       autocomplete="off" placeholder="Descricao -- valor" maxlength="25"
-        value="${botao.previousElementSibling.value}">
-       <button type="button" onclick="removerServico(this)"> <samp>-</samp> </button>`
-    let label = document.getElementById("servicosOrdemInput")
-    label.innerHTML += input;
+
+function mostraredit() {
+    var elemento = document.getElementById('elementoOculto');
+    if (elemento.style.display === 'none') {
+        elemento.style.display = 'block';
+    } else {
+        elemento.style.display = 'none';
+    }
+    if(document.forms[0][3].children.length === 3){
+        editarOrdemServico();
+    }
 }
 
 function formatarCPF(i) {
@@ -118,6 +120,7 @@ function editarServico(botao){
     form[1].value = parseFloat(dataS[1].textContent);
     form[1].placeholder = parseFloat(dataS[1].textContent);
 }
+
 function restFormSer(){
     let form = document.forms[0];
     form.action = "cadastrarS";

@@ -144,3 +144,47 @@ const formF = `<h3>Cadastro de Funcionario</h3>
                             <input type="submit" value="Cadastrar">
                         </form>
     `;
+
+function formOSEdit(data) {
+    const dias = data[2].textContent.split(": ")[1].split("-")
+    const dataCerta = dias[2]+"-"+dias[1]+"-"+dias[0];
+    return`
+            <label>
+                    Previsão de entrega
+                    <input required type="date"name="dataPrevisao" value="${dataCerta}">
+                </label>
+            <label>
+                Entregar:
+                <label>
+                    Sim
+                    <input type="radio" name="entregar" required value="sim" 
+                    checked="${data[1].textContent === "Entregar: Sim"}">
+                </label>
+                <label>
+                    Não
+                    <input type="radio" name="entregar" required value="nao"
+                    checked="${data[1].textContent === "Entregar: Não"}">
+                </label>
+            </label>
+            <label>
+                Descrição Veiculo:
+                <textarea required name="descricao" cols="30" rows="8">${data[3].textContent.split("Descricão: ")[1]}</textarea>
+            </label>
+            <label>
+                Veiculo
+                <select name="veiculo" required >
+                    <option value="carro">Carro de Passeio</option>
+                    <option value="moto">Motocicleta</option>
+                    <option value="suv">SUV / Crossover</option>
+                    <option value="caminhao">Caminhão</option>
+                    <option value="van">Van</option>
+                    <option value="frota">Veículo de Frota</option>
+                </select>
+            </label>
+            <label>
+                Valor Total
+                <input type="number" name="valorTotal" required readonly>
+            </label>
+            <input type="submit" value="Editar">
+    `
+}

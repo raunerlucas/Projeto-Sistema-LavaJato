@@ -5,7 +5,6 @@ import com.projeto.projetosistema.DAO.DAOInterface;
 import com.projeto.projetosistema.DAO.ErroDAO;
 import com.projeto.projetosistema.DAO.deployment.ClienteDAO;
 import com.projeto.projetosistema.DAO.deployment.OrdemServicoDAO;
-import com.projeto.projetosistema.DAO.deployment.ServicoDAO;
 import com.projeto.projetosistema.model.*;
 import com.projeto.projetosistema.utils.Tools;
 import jakarta.servlet.ServletContext;
@@ -19,17 +18,18 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet(name = "cadastrarOS", value = "/cadastrarOS")
-public class CadastrarOrdemServico extends HttpServlet {
+@WebServlet(name = "editarOS", value = "/editarOS")
+public class EditarOrdemServico extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         //pessoal
-        String clienteT = request.getParameter("cliente");
+        String idT = request.getParameter("id");
         //login
         String[] servicoInputs = request.getParameterValues("servicoInput");
         String descricao = request.getParameter("descricao");
@@ -43,50 +43,36 @@ public class CadastrarOrdemServico extends HttpServlet {
         ServletContext aplicacao = getServletContext();
         HttpSession sessao = request.getSession();
         Funcionario userS = (Funcionario) sessao.getAttribute("userSessao");
+        Empresa emp = (Empresa) aplicacao.getAttribute("empresa");
         if (userS != null && userS.isFuncionario()) {
-            if (Tools.validaValor(clienteT) && Tools.validaValor(descricao)
+            if (Tools.validaValor(idT) && Tools.validaValor(descricao)
                     && Tools.validaValor(veiculo) && Tools.validaValor(dataPrevisao)) {
+                OrdemServico osEd = null;
+                for (OrdemServico os : (List<OrdemServico>) aplicacao.getAttribute("ordemSevico")) {
+                    if (os.getId() == Integer.parseInt(idT)) {
+                        osEd = os;
+                    }
+                }
+                try (DAOInterface<OrdemServico> dao = new OrdemServicoDAO()) {
 
-                OrdemServico osNew = new OrdemServico(Integer.MAX_VALUE,
-                        LocalDate.now().format(dform),
-                        LocalDate.parse(dataPrevisao,DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                                .format(dform),entregar.equals("sim"),
-                        descricao,veiculo, null,null,null,null);
-                String numOS = "";
-                Funcionario func = (Funcionario) sessao.getAttribute("userSessao");
-                osNew.setFuncionario(func);
-                numOS += func.getId().toString();
-                Empresa empresa = (Empresa) aplicacao.getAttribute("empresa");
-                osNew.setEmpresa(empresa);
-                numOS += empresa.getId().toString();
-                try {
-                    ClienteDAO daoC = new ClienteDAO();
-                    Cliente clienteB = daoC.buscar(getCPF(clienteT));
-                    daoC.close();
-                    numOS += clienteB.getId().toString();
-                    osNew.setClinte(clienteB);
+                    osEd.setEmpresa(emp);
+                    osEd.setServicosOrdem(Tools.fixServicos(servicoFiltro(servicoInputs)));
+                    osEd.setDescricao(descricao);
+                    osEd.setVeiculo(veiculo);
+                    osEd.setEntregar(entregar.equals("sim"));
+                    osEd.setPrevisaoTermino(dataPrevisao);
+
+                    String dataEdit = osEd.getDataEmissao() + "( Editado em => " + LocalDate.now().format(dform) + " )";
+                    osEd.setDataEmissao(dataEdit);
+
+                    dao.editar(osEd);
+                    aplicacao.setAttribute("ordemSevico", Tools.getOS(userS));
+                    response.sendRedirect("viewOS.jsp?numOS=" + osEd.getNumeroOS() + "&msg=Ordem de Servico editada com sucesso!");
                 } catch (ErroDAO e) {
                     throw new RuntimeException(e);
                 }
-                try {
-                    osNew.setServicosOrdem(Tools.fixServicos(servicoFiltro(servicoInputs)));
-
-                    DAOInterface<OrdemServico> daoOS = new OrdemServicoDAO();
-                    daoOS.inserir(osNew);
-                    numOS += osNew.getId().toString();
-                    osNew.setNumeroOS(Integer.parseInt(numOS));
-                    daoOS.editar(osNew);
-                    daoOS.close();
-
-                    aplicacao.setAttribute("ordemSevico",Tools.getOS(func));
-
-                    response.sendRedirect("index.jsp?msg=Ordem de Servico Cadastrada com sucesso!");
-                } catch (ErroDAO e) {
-                    throw new RuntimeException(e);
-                }
-
             } else {
-                response.sendRedirect("CadastrarOrdem.jsp?msg=Faltam dados para cadastra a OS");
+                response.sendRedirect("CadastrarOrdem.jsp?msg=Faltam dados para Editar a OS");
             }
         } else {
             response.sendRedirect("index.jsp?msg=O funcionario pracisa estar logado");
@@ -103,7 +89,7 @@ public class CadastrarOrdemServico extends HttpServlet {
         return desVal;
     }
 
-    private String getCPF(String c){
+    private String getCPF(String c) {
         return c.split(" -- ")[1];
     }
 

@@ -30,11 +30,11 @@
                 </label>
                 <label>
                     Descrição Veiculo:
-                    <textarea required name="descricao" cols="30" rows="10">
-Modelo: ***;
-Placa: ***;
-Cor: ***;
-OBS: ***;
+                    <textarea required name="descricao" cols="30" rows="8">
+Modelo: ***
+Placa: ***
+Cor: ***
+OBS: ***
                                     </textarea>
                 </label>
                 <label>
