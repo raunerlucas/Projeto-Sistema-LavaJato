@@ -86,7 +86,7 @@
                 </div>
             </fieldset>
             <fieldset id="elementoOculto" style="display: none">
-                <a><button onclick="mostraredit()">Cancelar</button></a>
+                <a><button type="button" onclick="mostraredit()">Cancelar</button></a>
                 <label id="servicosOrdemInput">
                     Seviços
                     <select name="servicoInput" size="5" multiple required onclick="somarValor(this)">

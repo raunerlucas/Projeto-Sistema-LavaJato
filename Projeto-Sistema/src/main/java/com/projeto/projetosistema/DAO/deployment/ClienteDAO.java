@@ -68,8 +68,8 @@ public class ClienteDAO implements DAOInterface<Cliente> {
         try {
             //(id_endereco, nome, sobrenome, telefone, cpf, login, senha, email)
             PreparedStatement stm = con.prepareStatement("UPDATE Cliente " +
-                    "SET id_endereco = ?, nome = ?, sobrenome = ?, telefone = ?, cpf = ?, login = ?, senha = ?, email = ? " +
-                    "WHERE id = ?;");
+                    " SET id_endereco = ?, nome = ?, sobrenome = ?, telefone = ?, cpf = ?, login = ?, senha = ?, email = ? " +
+                    " WHERE id = ?;");
             stm.setInt(1, obj.getEndereco().getId());
             stm.setString(2, obj.getNome());
             stm.setString(3, obj.getSobrenome());
@@ -79,6 +79,7 @@ public class ClienteDAO implements DAOInterface<Cliente> {
             stm.setString(7, obj.getSenha());
             stm.setString(8, obj.getEmail());
             stm.setInt(9, obj.getId());
+            stm.executeUpdate();
             stm.close();
         } catch (SQLException e) {
             throw new ErroDAO(e);

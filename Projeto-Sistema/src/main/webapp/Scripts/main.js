@@ -52,7 +52,7 @@ function haveCliente(i) {
     }
 }
 
-function editarOrdemServico(){
+function editarOrdemServico() {
     let divE = document.getElementById("elementoOculto")
     const dataBase = document.forms[0][2].children[0].children
     divE.innerHTML += formOSEdit(dataBase);
@@ -65,8 +65,19 @@ function mostraredit() {
     } else {
         elemento.style.display = 'none';
     }
-    if(document.forms[0][3].children.length === 3){
+    if (document.forms[0][3].children.length === 3) {
         editarOrdemServico();
+    } else {
+        editCF()
+    }
+}
+
+function editCF() {
+    let divE = document.getElementById("elementoOculto")
+    if (document.getElementById("iptSalvar") == null){
+        divE.innerHTML += `<input type="submit" id="iptSalvar" value="Salvar">`
+    }else {
+        divE.removeChild(document.getElementById("iptSalvar"))
     }
 }
 
@@ -92,23 +103,25 @@ function formatarTelefone(mascara, documento) {
     }
 }
 
-function somarValor(botao){
+function somarValor(botao) {
     let inpValt = document.getElementsByName("valorTotal").item(0);
     let valor = 0;
     for (const s of botao.children) {
-        if (s.selected){
+        if (s.selected) {
             valor += parseFloat(s.value.split(" -- ")[1])
         }
     }
     inpValt.value = valor
 }
 
-function editarUserSessao(user){
+function clearformC() {
+    document.getElementById("popApps").innerHTML = '';
 }
-function editarServico(botao){
+
+function editarServico(botao) {
     let form = document.forms[0];
     form.action = "editarS";
-    if (document.getElementById("cancEdit") == null){
+    if (document.getElementById("cancEdit") == null) {
         form.innerHTML += `<button type="button" id="cancEdit" onclick="restFormSer()">Cancelar</button>`
     }
     form[3].value = "Editar";
@@ -121,7 +134,7 @@ function editarServico(botao){
     form[1].placeholder = parseFloat(dataS[1].textContent);
 }
 
-function restFormSer(){
+function restFormSer() {
     let form = document.forms[0];
     form.action = "cadastrarS";
     form[3].value = "Cadastrar";

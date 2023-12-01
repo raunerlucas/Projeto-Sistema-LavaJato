@@ -1,4 +1,6 @@
-const  formC = `<h3>Cadastro de Cliente</h3>
+const  formC = `
+                        <button type="button" onclick="clearformC()">Voltar</button>
+                        <h3>Cadastro de Cliente</h3>
                         <form method="post" action="cadastrarCliente">
                             <fieldset>
                                 <label>
@@ -66,7 +68,9 @@ const  formC = `<h3>Cadastro de Cliente</h3>
                         </form>
     `;
 
-const formF = `<h3>Cadastro de Funcionario</h3>
+const formF = `
+                    <button type="button" onclick="clearformC()">Voltar</button>
+                    <h3>Cadastro de Funcionario</h3>
                         <form method="post" action="cadastrarFuncionario">
                             <fieldset>
                                 <label>

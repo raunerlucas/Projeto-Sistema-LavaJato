@@ -62,7 +62,8 @@ public class EditarOrdemServico extends HttpServlet {
                     osEd.setEntregar(entregar.equals("sim"));
                     osEd.setPrevisaoTermino(dataPrevisao);
 
-                    String dataEdit = osEd.getDataEmissao() + "( Editado em => " + LocalDate.now().format(dform) + " )";
+                    String dataEdit = osEd.getDataEmissao() + "\n( Editado em => " + LocalDate.now().format(dform)
+                            +" -- "+userS.getNome()+ " )";
                     osEd.setDataEmissao(dataEdit);
 
                     dao.editar(osEd);

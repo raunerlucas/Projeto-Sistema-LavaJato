@@ -16,6 +16,16 @@ public class Tools {
             return false;
     }
 
+    public static Endereco validaEndereco(int cep) throws ErroDAO {
+        Endereco en = null;
+        try (EnderecoDAO dao = new EnderecoDAO()) {
+            en = dao.buscarCep(cep);
+        } catch (ErroDAO e) {
+            throw new ErroDAO(e);
+        }
+        return en;
+    }
+
     public static Funcionario validaFuncionario(String login, String senha) throws ErroDAO {
         Funcionario funcionario = null;
         try (FuncionarioDAO dao = new FuncionarioDAO()) {
@@ -30,16 +40,6 @@ public class Tools {
             throw new ErroDAO(e);
         }
         return funcionario;
-    }
-
-    public static Endereco validaEndereco(int cep) throws ErroDAO {
-        Endereco en = null;
-        try (EnderecoDAO dao = new EnderecoDAO()) {
-            en = dao.buscarCep(cep);
-        } catch (ErroDAO e) {
-            throw new ErroDAO(e);
-        }
-        return en;
     }
     public static Cliente validaCliente(String login, String senha) throws ErroDAO {
         Cliente cliente = null;
@@ -99,11 +99,13 @@ public class Tools {
     public static List<Funcionario> getFuncionarios() throws ErroDAO {
         DAOInterface<Funcionario> dao = new FuncionarioDAO();
         List<Funcionario> fs = dao.buscar();
+        dao.close();
         return fs;
     }
     public static List<Cliente> getClientes() throws ErroDAO {
         DAOInterface<Cliente> dao = new ClienteDAO();
         List<Cliente> cl = dao.buscar();
+        dao.close();
         return cl;
     }
 }

@@ -30,10 +30,12 @@
             <ol>
                 <c:forEach var="cli" items="${applicationScope.clientes}" >
                     <li>
-                        <button>
-                            <span>Nome: ${cli.getNome()}</span><br>
-                            <span>CPF: ${cli.getCPF()}</span>
-                        </button>
+                        <a href="viewC.jsp?numC=${cli.getId()}">
+                            <button>
+                                <span>Nome: ${cli.getNome()}</span><br>
+                                <span>CPF: ${cli.getCPF()}</span>
+                            </button>
+                        </a>
                     </li>
                 </c:forEach>
             </ol>
@@ -45,11 +47,13 @@
                 <ol>
                     <c:forEach var="func" items="${applicationScope.funcionarios}" >
                         <li>
-                            <button>
-                                <span>Nome: ${func.getNome()}</span><br>
-                                <span>CPF: ${func.getCPF()}</span><br>
-                                <span>Admin: ${func.isAdmin() ? "Sim" : "Não"}</span>
-                            </button>
+                            <a href="viewF.jsp?numF=${func.getId()}">
+                                <button>
+                                    <span>Nome: ${func.getNome()}</span><br>
+                                    <span>CPF: ${func.getCPF()}</span><br>
+                                    <span>Admin: ${func.isAdmin() ? "Sim" : "Não"}</span>
+                                </button>
+                            </a>
                         </li>
                     </c:forEach>
                 </ol>
