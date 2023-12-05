@@ -71,7 +71,13 @@
                     <h3>Entregar: ${osView.isEntregar()? "Sim" : "Não"}</h3>
                     <h3>Previsão de Termino: ${osView.getPrevisaoTermino()}</h3>
                     <h3>Descricão: ${osView.getDescricao()}</h3>
-                    <h3>Veiculo: ${osView.getVeiculo()}</h3>
+                    <div>
+                        <h3>Veiculo:</h3>
+                        <h4> Tipo: ${osView.getVeiculo().getTipo()}</h4>
+                        <h4> Placa: ${osView.getVeiculo().getPlaca()}</h4>
+                        <h4> Modelo: ${osView.getVeiculo().getModelo()}</h4>
+                        <h4> Cor: ${osView.getVeiculo().getCor()}</h4>
+                    </div>
                     <h3>Servicos:
                         <ul>
                             <c:if test="${osView.getServicosOrdem() == [null]}">
@@ -87,15 +93,18 @@
             </fieldset>
             <fieldset id="elementoOculto" style="display: none">
                 <a><button type="button" onclick="mostraredit()">Cancelar</button></a>
-                <label id="servicosOrdemInput">
-                    Seviços
-                    <select name="servicoInput" size="5" multiple required onclick="somarValor(this)">
-                        <c:forEach var="ser" items="${applicationScope.servicos}" >
-                            <option value="${ser.getDescricao()} -- ${ser.getPreco()}">${ser.getDescricao()}</option>
-                        </c:forEach>
-                    </select>
-                </label>
+                <fieldset>
+                    <label id="servicosOrdemInput">
+                        Seviços
+                        <select name="servicoInput" size="5" multiple required onclick="somarValor(this)">
+                            <c:forEach var="ser" items="${applicationScope.servicos}" >
+                                <option value="${ser.getDescricao()} -- ${ser.getPreco()}">${ser.getDescricao()}</option>
+                            </c:forEach>
+                        </select>
+                    </label>
+                </fieldset>
                 <input type="hidden" readonly name="id" value="${osView.getId()}">
+                <input type="hidden" readonly name="idV" value="${osView.getVeiculo().getId()}">
             </fieldset>
         </form>
     </c:when>

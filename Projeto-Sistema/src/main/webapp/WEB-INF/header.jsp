@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="images/logo.ico">
+    <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" type="text/css" href="Styles/styles.css">
     <script type="text/javascript" defer src="Scripts/main.js"></script>
     <script type="text/javascript" defer src="Scripts/draw.js"></script>
@@ -28,7 +28,7 @@
 </head>
 <body>
     <header>
-        <img src="images/logo.ico">
+        <img src="images/logo.png">
         <h1>Lava Bem</h1>
         <nav>
             <c:if test="${sessionScope.userSessao != null}">
@@ -38,7 +38,7 @@
             </c:if>
         </nav>
         <c:if test="${param.msg != null}">
-            <div id="msg-div">
+            <div id="msg" >
                 <p>${param.msg}</p>
             </div>
         </c:if>

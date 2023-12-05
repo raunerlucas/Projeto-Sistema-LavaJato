@@ -14,7 +14,7 @@ public class OrdemServico {
     private boolean entregar;
     private Status status = AGUARDANDO;
     private String descricao;
-    private String veiculo;
+    private Veiculo veiculo;
     private Funcionario funcionario;
     private Cliente cliente;
     private Empresa empresa;
@@ -24,7 +24,7 @@ public class OrdemServico {
     }
 
     public OrdemServico(Integer id, Integer numeroOS, String dataEmissao, String previsaoTermino, boolean entregar,
-                        Status status, String descricao, String veiculo, Funcionario funcionario, Cliente cliente,
+                        Status status, String descricao, Veiculo veiculo, Funcionario funcionario, Cliente cliente,
                         Empresa empresa, List<Servico> servicosOrdem) {
         this.id = id;
         this.numeroOS = numeroOS;
@@ -34,6 +34,8 @@ public class OrdemServico {
         this.status = status;
         this.descricao = descricao;
         this.veiculo = veiculo;
+        if (veiculo != null)
+            veiculo.addOrdemSevico(this);
         this.funcionario = funcionario;
         this.cliente = cliente;
         this.empresa = empresa;
@@ -41,13 +43,15 @@ public class OrdemServico {
     }
 
     public OrdemServico(Integer numeroOS, String dataEmissao, String previsaoTermino, boolean entregar,
-                        String descricao,String veiculo, Funcionario funcionario, Cliente cliente, Empresa empresa, List<Servico> servicosOrdem) {
+                        String descricao,Veiculo veiculo, Funcionario funcionario, Cliente cliente, Empresa empresa, List<Servico> servicosOrdem) {
         this.numeroOS = numeroOS;
         this.dataEmissao = dataEmissao;
         this.previsaoTermino = previsaoTermino;
         this.entregar = entregar;
         this.descricao = descricao;
         this.veiculo = veiculo;
+        if (veiculo != null)
+            veiculo.addOrdemSevico(this);
         this.funcionario = funcionario;
         this.cliente = cliente;
         this.empresa = empresa;
@@ -165,12 +169,13 @@ public class OrdemServico {
         this.descricao = descricao;
     }
 
-    public String getVeiculo() {
+    public Veiculo getVeiculo() {
         return veiculo;
     }
 
-    public void setVeiculo(String veiculo) {
+    public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
+        veiculo.addOrdemSevico(this);
     }
 
     public Float getValorTotal() {

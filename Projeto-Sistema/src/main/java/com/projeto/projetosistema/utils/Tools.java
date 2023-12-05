@@ -41,6 +41,7 @@ public class Tools {
         }
         return funcionario;
     }
+
     public static Cliente validaCliente(String login, String senha) throws ErroDAO {
         Cliente cliente = null;
         try (ClienteDAO dao = new ClienteDAO()) {
@@ -57,9 +58,10 @@ public class Tools {
         return cliente;
     }
 
-    public static String trataCPF(String cpf){
+    public static String trataCPF(String cpf) {
         return cpf.replaceAll("[.-]", "");
     }
+
     public static String trataTelefone(String telefone) {
         // Remove parênteses, espaços, traço e retorna apenas os dígitos
         return telefone.replaceAll("[()\\s-]", "");
@@ -69,7 +71,7 @@ public class Tools {
         List<Servico> servicID = new ArrayList<>();
         try {
             ServicoDAO dao = new ServicoDAO();
-            for (Servico s: servicos) {
+            for (Servico s : servicos) {
                 Servico ser = dao.buscar(s);
                 servicID.add(ser);
             }
@@ -90,22 +92,43 @@ public class Tools {
         dao.close();
         return os;
     }
+
     public static List<Servico> getServicos() throws ErroDAO {
         DAOInterface<Servico> dao = new ServicoDAO();
         List<Servico> s = dao.buscar();
         dao.close();
         return s;
     }
+
     public static List<Funcionario> getFuncionarios() throws ErroDAO {
         DAOInterface<Funcionario> dao = new FuncionarioDAO();
         List<Funcionario> fs = dao.buscar();
         dao.close();
         return fs;
     }
+
     public static List<Cliente> getClientes() throws ErroDAO {
         DAOInterface<Cliente> dao = new ClienteDAO();
         List<Cliente> cl = dao.buscar();
         dao.close();
         return cl;
+    }
+
+    public static Veiculo fixVeiculo(Veiculo vec) throws ErroDAO {
+        Veiculo v = null;
+        VeiculoDAO dao = new VeiculoDAO();
+        v = dao.buscar(vec.getPlaca());
+        if (v == null) {
+            dao.inserir(vec);
+            return vec;
+        } else {
+            vec.setId(v.getId());
+            if (!v.getModelo().startsWith(vec.getModelo()) ||
+                    !v.getTipo().startsWith(vec.getTipo()) ||
+                    !v.getCor().startsWith(vec.getCor())) {
+                dao.editar(vec);
+            }
+            return vec;
+        }
     }
 }

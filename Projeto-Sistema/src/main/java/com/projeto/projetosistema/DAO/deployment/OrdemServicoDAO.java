@@ -27,7 +27,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
         // Setar a empresa pelo contesto da aplicacao
         try {
             PreparedStatement stm = con.prepareStatement("INSERT INTO OrdemServico " +
-                    "(id_funcionario, id_cliente, id_empresa, numOS, status, observacao, veiculo, entregar, servicosOrdem, dataEmissao, previsaoTermino)\n" +
+                    "(id_funcionario, id_cliente, id_empresa, numOS, status, observacao, id_veiculo, entregar, servicosOrdem, dataEmissao, previsaoTermino)\n" +
                     "VALUES (?, ?, ?, ?, ?, ?,?, ?, ?::jsonb, ?, ?);", 1);
             stm.setInt(1, obj.getFuncionario().getId());
             stm.setInt(2, obj.getClinte().getId());
@@ -35,7 +35,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
             stm.setInt(4, obj.getNumeroOS());
             stm.setString(5, obj.getStatus().name());
             stm.setString(6, obj.getDescricao());
-            stm.setString(7, obj.getDescricao());
+            stm.setInt(7, obj.getVeiculo().getId());
             stm.setBoolean(8, obj.isEntregar());
             stm.setString(9, obj.jsonCreate());
             stm.setString(10, obj.getDataEmissao());
@@ -73,7 +73,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
     public void editar(OrdemServico obj) throws ErroDAO {
         try {
             PreparedStatement stm = con.prepareStatement("UPDATE OrdemServico " +
-                    "SET  id_funcionario = ?, id_cliente = ?, id_empresa = ?, numOS = ?, status = ?, observacao = ?, veiculo = ?," +
+                    "SET  id_funcionario = ?, id_cliente = ?, id_empresa = ?, numOS = ?, status = ?, observacao = ?, id_veiculo = ?," +
                     " entregar = ?, servicosOrdem  = ?::jsonb, dataEmissao = ?, previsaoTermino = ? " +
                     "WHERE id = ?;");
             stm.setInt(1, obj.getFuncionario().getId());
@@ -82,7 +82,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
             stm.setInt(4, obj.getNumeroOS());
             stm.setString(5, obj.getStatus().name());
             stm.setString(6, obj.getDescricao());
-            stm.setString(7, obj.getVeiculo());
+            stm.setInt(7, obj.getVeiculo().getId());
             stm.setBoolean(8, obj.isEntregar());
             stm.setString(9, obj.jsonCreate());
             stm.setString(10, obj.getDataEmissao());
@@ -109,6 +109,10 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                 Funcionario funcionario = daoF.buscar(rs.getInt("id_funcionario"));
                 daoF.close();
 
+                DAOInterface<Veiculo> daoV = new VeiculoDAO();
+                Veiculo veiculo = daoV.buscar(rs.getInt("id_veiculo"));
+                daoV.close();
+
                 DAOInterface<Cliente> daoC = new ClienteDAO();
                 Cliente cliente = daoC.buscar(rs.getInt("id_cliente"));
                 daoC.close();
@@ -133,7 +137,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
-                        rs.getString("veiculo"),
+                        veiculo,
                         funcionario,
                         cliente,
                         null,
@@ -157,6 +161,10 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                 DAOInterface<Funcionario> daoF = new FuncionarioDAO();
                 Funcionario funcionario = daoF.buscar(rs.getInt("id_funcionario"));
                 daoF.close();
+
+                DAOInterface<Veiculo> daoV = new VeiculoDAO();
+                Veiculo veiculo = daoV.buscar(rs.getInt("id_veiculo"));
+                daoV.close();
 
                 DAOInterface<Cliente> daoC = new ClienteDAO();
                 Cliente cliente = daoC.buscar(rs.getInt("id_cliente"));
@@ -182,7 +190,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
-                        rs.getString("veiculo"),
+                        veiculo,
                         funcionario,
                         cliente,
                         null,
@@ -207,6 +215,10 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                 DAOInterface<Funcionario> daoF = new FuncionarioDAO();
                 Funcionario funcionario = daoF.buscar(rs.getInt("id_funcionario"));
                 daoF.close();
+
+                DAOInterface<Veiculo> daoV = new VeiculoDAO();
+                Veiculo veiculo = daoV.buscar(rs.getInt("id_veiculo"));
+                daoV.close();
 
                 List<Servico> servicosDaOrdem = new ArrayList<>();
                 DAOInterface<Servico> daoS = new ServicoDAO();
@@ -234,7 +246,7 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
-                        rs.getString("veiculo"),
+                        veiculo,
                         funcionario,
                         obj,
                         null,
@@ -263,6 +275,10 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                 Cliente cliente = daoC.buscar(rs.getInt("id_cliente"));
                 daoC.close();
 
+                DAOInterface<Veiculo> daoV = new VeiculoDAO();
+                Veiculo veiculo = daoV.buscar(rs.getInt("id_veiculo"));
+                daoV.close();
+
                 List<Servico> servicosDaOrdem = new ArrayList<>();
                 DAOInterface<Servico> daoS = new ServicoDAO();
 
@@ -283,8 +299,60 @@ public class OrdemServicoDAO implements DAOInterface<OrdemServico> {
                         rs.getBoolean("entregar"),
                         Status.valueOf(rs.getString("status")),
                         rs.getString("observacao"),
-                        rs.getString("veiculo"),
+                        veiculo,
                         obj,
+                        cliente,
+                        null,
+                        servicosDaOrdem
+                );
+
+                ordensServico.add(ordemServico);
+            }
+        } catch (SQLException e) {
+            throw new ErroDAO(e);
+        }
+
+        return ordensServico;
+    }
+
+    public List<OrdemServico> buscarPorVeiculo(Veiculo obj) throws ErroDAO {
+        List<OrdemServico> ordensServico = new ArrayList<>();
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM OrdemServico WHERE id_veiculo = ?;");
+            stm.setInt(1, obj.getId());
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                DAOInterface<Cliente> daoC = new ClienteDAO();
+                Cliente cliente = daoC.buscar(rs.getInt("id_cliente"));
+                daoC.close();
+
+                DAOInterface<Funcionario> daoF = new FuncionarioDAO();
+                Funcionario funcionario = daoF.buscar(rs.getInt("id_funcionario"));
+                daoF.close();
+
+                List<Servico> servicosDaOrdem = new ArrayList<>();
+                DAOInterface<Servico> daoS = new ServicoDAO();
+
+                JSONArray jsonServicos = new JSONArray(rs.getString("servicosOrdem"));
+                for (int i = 0; i < jsonServicos.length(); i++) {
+                    JSONObject jsonServico = jsonServicos.getJSONObject(i);
+                    int idServico = jsonServico.getInt("id_servico");
+                    Servico servico = daoS.buscar(idServico);
+                    servicosDaOrdem.add(servico);
+                }
+                daoS.close();
+
+                OrdemServico ordemServico = new OrdemServico(
+                        rs.getInt("id"),
+                        rs.getInt("numOS"),
+                        rs.getString("dataEmissao"),
+                        rs.getString("previsaoTermino"),
+                        rs.getBoolean("entregar"),
+                        Status.valueOf(rs.getString("status")),
+                        rs.getString("observacao"),
+                        obj,
+                        funcionario,
                         cliente,
                         null,
                         servicosDaOrdem

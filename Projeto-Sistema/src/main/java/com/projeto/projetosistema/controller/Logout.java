@@ -5,6 +5,7 @@ import com.projeto.projetosistema.DAO.ErroDAO;
 import com.projeto.projetosistema.DAO.deployment.EmpresaDAO;
 import com.projeto.projetosistema.model.Empresa;
 import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +16,9 @@ import java.io.IOException;
 
 @WebServlet(name = "logout", value = "/logout")
 public class Logout extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");

@@ -1,5 +1,5 @@
 const  formC = `
-                        <button type="button" onclick="clearformC()">Voltar</button>
+                        <button type="button" onclick="clearformC()">CANCELAR</button>
                         <h3>Cadastro de Cliente</h3>
                         <form method="post" action="cadastrarCliente">
                             <fieldset>
@@ -69,7 +69,7 @@ const  formC = `
     `;
 
 const formF = `
-                    <button type="button" onclick="clearformC()">Voltar</button>
+                    <button type="button" onclick="clearformC()">CANCELAR</button>
                     <h3>Cadastro de Funcionario</h3>
                         <form method="post" action="cadastrarFuncionario">
                             <fieldset>
@@ -153,6 +153,35 @@ function formOSEdit(data) {
     const dias = data[2].textContent.split(": ")[1].split("-")
     const dataCerta = dias[2]+"-"+dias[1]+"-"+dias[0];
     return`
+ <fieldset>
+                <label>
+                    Veiculo tipo:
+                    <select name="veiculo" required>
+                        <option value="carro">Carro de Passeio</option>
+                        <option value="suv">SUV / Crossover</option>
+                        <option value="caminhao">Caminhão</option>
+                        <option value="moto">Motocicleta</option>
+                        <option value="van">Van</option>
+                        <option value="frota">Veículo de Frota</option>
+                    </select>
+                </label>
+                <label>
+                    Placa
+                    <input required name="placa" placeholder=" Placa" maxlength="25" 
+                    value="${data[4].children[2].textContent.split("Placa: ")[1]}">
+                </label>
+                <label>
+                    Modelo
+                    <input required name="modelo" placeholder=" Modelo" maxlength="50" 
+                    value="${data[4].children[3].textContent.split("Modelo: ")[1]}">
+                </label>
+                <label>
+                    cor
+                    <input name="cor" placeholder=" Cor" maxlength="25" 
+                    value="${data[4].children[4].textContent.split("Cor: ")[1]}">
+                </label>
+            </fieldset>
+            <fieldset>
             <label>
                     Previsão de entrega
                     <input required type="date"name="dataPrevisao" value="${dataCerta}">
@@ -175,20 +204,10 @@ function formOSEdit(data) {
                 <textarea required name="descricao" cols="30" rows="8">${data[3].textContent.split("Descricão: ")[1]}</textarea>
             </label>
             <label>
-                Veiculo
-                <select name="veiculo" required >
-                    <option value="carro">Carro de Passeio</option>
-                    <option value="moto">Motocicleta</option>
-                    <option value="suv">SUV / Crossover</option>
-                    <option value="caminhao">Caminhão</option>
-                    <option value="van">Van</option>
-                    <option value="frota">Veículo de Frota</option>
-                </select>
-            </label>
-            <label>
                 Valor Total
                 <input type="number" name="valorTotal" required readonly>
             </label>
+            </fieldset>
             <input type="submit" value="Editar">
     `
 }

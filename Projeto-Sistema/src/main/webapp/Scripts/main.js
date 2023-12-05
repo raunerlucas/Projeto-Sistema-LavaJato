@@ -3,6 +3,7 @@ onload = function () {
     if (urlParams.get('cds') === "T") {
         cadatrarCleinte();
     }
+    limpar()
 }
 
 function mudarLogin(evento) {
@@ -65,7 +66,7 @@ function mostraredit() {
     } else {
         elemento.style.display = 'none';
     }
-    if (document.forms[0][3].children.length === 3) {
+    if (document.forms[0][3].children.length === 4) {
         editarOrdemServico();
     } else {
         editCF()
@@ -165,3 +166,23 @@ async function buscarCep(i) {
     }
 }
 
+function limpar() {
+
+    if (document.getElementById('buscas') != null){
+        var divBuscas = document.getElementById('buscas');
+        if (divBuscas.innerHTML.trim() !== '') {
+            setTimeout(function() {
+                divBuscas.innerHTML = '';
+            }, 10000);
+        }
+    }
+
+    if (document.getElementById('msg') != null){
+        var divMsg = document.getElementById('msg');
+        if (divMsg.innerHTML.trim() !== '') {
+            setTimeout(function() {
+                divMsg.innerHTML = '';
+            }, 4000);
+        }
+    }
+}

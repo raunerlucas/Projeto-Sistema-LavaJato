@@ -33,7 +33,11 @@ public class CadastrarOrdemServico extends HttpServlet {
         //login
         String[] servicoInputs = request.getParameterValues("servicoInput");
         String descricao = request.getParameter("descricao");
-        String veiculo = request.getParameter("veiculo");
+        //veiculo
+        String tipoVeiculo = request.getParameter("veiculo");
+        String placa = request.getParameter("placa").toUpperCase();
+        String modelo = request.getParameter("modelo");
+        String cor = request.getParameter("cor");
         //endereco
         String dataPrevisao = request.getParameter("dataPrevisao");
         String entregar = request.getParameter("entregar");
@@ -45,13 +49,14 @@ public class CadastrarOrdemServico extends HttpServlet {
         Funcionario userS = (Funcionario) sessao.getAttribute("userSessao");
         if (userS != null && userS.isFuncionario()) {
             if (Tools.validaValor(clienteT) && Tools.validaValor(descricao)
-                    && Tools.validaValor(veiculo) && Tools.validaValor(dataPrevisao)) {
+                    && Tools.validaValor(tipoVeiculo) && Tools.validaValor(dataPrevisao)) {
 
                 OrdemServico osNew = new OrdemServico(Integer.MAX_VALUE,
                         LocalDate.now().format(dform),
                         LocalDate.parse(dataPrevisao,DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                                 .format(dform),entregar.equals("sim"),
-                        descricao,veiculo, null,null,null,null);
+                        descricao,null, null,null,null,null);
+
                 String numOS = "";
                 Funcionario func = (Funcionario) sessao.getAttribute("userSessao");
                 osNew.setFuncionario(func);
@@ -59,7 +64,11 @@ public class CadastrarOrdemServico extends HttpServlet {
                 Empresa empresa = (Empresa) aplicacao.getAttribute("empresa");
                 osNew.setEmpresa(empresa);
                 numOS += empresa.getId().toString();
+
                 try {
+                    Veiculo vec = new Veiculo(placa,modelo,tipoVeiculo,cor);
+                    osNew.setVeiculo(Tools.fixVeiculo(vec));
+
                     ClienteDAO daoC = new ClienteDAO();
                     Cliente clienteB = daoC.buscar(getCPF(clienteT));
                     daoC.close();

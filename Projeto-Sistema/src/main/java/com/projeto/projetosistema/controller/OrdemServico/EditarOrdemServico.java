@@ -30,10 +30,15 @@ public class EditarOrdemServico extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         //pessoal
         String idT = request.getParameter("id");
+        String idVT = request.getParameter("idV");
         //login
         String[] servicoInputs = request.getParameterValues("servicoInput");
         String descricao = request.getParameter("descricao");
-        String veiculo = request.getParameter("veiculo");
+        //veiculo
+        String tipoVeiculo = request.getParameter("veiculo");
+        String placa = request.getParameter("placa").toUpperCase();
+        String modelo = request.getParameter("modelo");
+        String cor = request.getParameter("cor");
         //endereco
         String dataPrevisao = request.getParameter("dataPrevisao");
         String entregar = request.getParameter("entregar");
@@ -46,7 +51,9 @@ public class EditarOrdemServico extends HttpServlet {
         Empresa emp = (Empresa) aplicacao.getAttribute("empresa");
         if (userS != null && userS.isFuncionario()) {
             if (Tools.validaValor(idT) && Tools.validaValor(descricao)
-                    && Tools.validaValor(veiculo) && Tools.validaValor(dataPrevisao)) {
+                    && Tools.validaValor(tipoVeiculo) && Tools.validaValor(placa)
+                    && Tools.validaValor(modelo) && Tools.validaValor(cor) &&
+                    Tools.validaValor(dataPrevisao)) {
                 OrdemServico osEd = null;
                 for (OrdemServico os : (List<OrdemServico>) aplicacao.getAttribute("ordemSevico")) {
                     if (os.getId() == Integer.parseInt(idT)) {
@@ -58,7 +65,8 @@ public class EditarOrdemServico extends HttpServlet {
                     osEd.setEmpresa(emp);
                     osEd.setServicosOrdem(Tools.fixServicos(servicoFiltro(servicoInputs)));
                     osEd.setDescricao(descricao);
-                    osEd.setVeiculo(veiculo);
+                    Veiculo veic = new Veiculo(Integer.parseInt(idVT),placa,modelo,tipoVeiculo,cor);
+                    osEd.setVeiculo(Tools.fixVeiculo(veic));
                     osEd.setEntregar(entregar.equals("sim"));
                     osEd.setPrevisaoTermino(dataPrevisao);
 

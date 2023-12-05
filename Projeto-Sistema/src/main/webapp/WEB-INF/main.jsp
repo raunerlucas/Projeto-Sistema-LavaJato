@@ -1,9 +1,25 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div id="popApps">
-</div>
+<c:set var="uS" value="${sessionScope.userSessao}"/>
 <section>
-    <c:set var="uS" value="${sessionScope.userSessao}"/>
+    <form action="buscar" >
+        <input name="buscar" placeholder=" Buscar Ordem De Serviço" maxlength="25"/>
+        <input type="submit"value="Buscar"/>
+    </form>
+    <div id="buscas">
+        <c:forEach var="buss" items="${applicationScope.buscados}">
+            <li>
+                <a href="${buss.getLink()}">
+                    <button>
+                        <span>${buss.getResumo()}</span><br>
+                    </button>
+                </a>
+            </li>
+        </c:forEach>
+    </div>
+    <div id="popApps"></div>
+</section>
+<section>
     <div class="ordens-servico">
         <h2> Ordem de Servico </h2>
         <c:if test="${uS.isFuncionario()}">
@@ -12,16 +28,18 @@
                 <a href="Servicos.jsp"><button>SERVIÇOS</button></a>
             </c:if>
         </c:if>
-        <c:forEach var="ordem" items="${applicationScope.ordemSevico}" >
-            <li>
-                <a href="viewOS.jsp?numOS=${ordem.getNumeroOS()}">
-                    <button>
-                        <span>Numero: ${ordem.getNumeroOS()}</span><br>
-                        <span>Status: ${ordem.getStatus()}</span>
-                    </button>
-                </a>
-            </li>
-        </c:forEach>
+        <ul>
+            <c:forEach var="ordem" items="${applicationScope.ordemSevico}" >
+                <li>
+                    <a href="viewOS.jsp?numOS=${ordem.getNumeroOS()}">
+                        <button>
+                            <span>Numero: ${ordem.getNumeroOS()}</span><br>
+                            <span>Status: ${ordem.getStatus()}</span>
+                        </button>
+                    </a>
+                </li>
+            </c:forEach>
+        </ul>
     </div>
     <c:if test="${uS.isFuncionario()}">
         <div class="cliente">

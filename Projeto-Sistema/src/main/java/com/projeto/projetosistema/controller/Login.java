@@ -14,7 +14,8 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "login", value = "/login")
 public class Login extends HttpServlet {
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-16");
@@ -32,13 +33,13 @@ public class Login extends HttpServlet {
                     if (func != null) {
                         sessao = request.getSession();
                         sessao.setAttribute("userSessao", func);
-                        aplicacao.setAttribute("empresa",getEmpresa());
+                        aplicacao.setAttribute("empresa", getEmpresa());
 
-                        aplicacao.setAttribute("clientes",Tools.getClientes());
-                        aplicacao.setAttribute("servicos",Tools.getServicos());
+                        aplicacao.setAttribute("clientes", Tools.getClientes());
+                        aplicacao.setAttribute("servicos", Tools.getServicos());
                         if (func.isAdmin())
                             aplicacao.setAttribute("funcionarios", Tools.getFuncionarios());
-                        aplicacao.setAttribute("ordemSevico",Tools.getOS(func));
+                        aplicacao.setAttribute("ordemSevico", Tools.getOS(func));
                         response.sendRedirect("index.jsp");
 
                     } else {
@@ -49,8 +50,8 @@ public class Login extends HttpServlet {
                     if (clint != null) {
                         sessao = request.getSession();
                         sessao.setAttribute("userSessao", clint);
-                        aplicacao.setAttribute("empresa",getEmpresa());
-                        aplicacao.setAttribute("ordemSevico",getOS(clint));
+                        aplicacao.setAttribute("empresa", getEmpresa());
+                        aplicacao.setAttribute("ordemSevico", getOS(clint));
 
                         response.sendRedirect("index.jsp");
                     } else {

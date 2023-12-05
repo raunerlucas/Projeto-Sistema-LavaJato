@@ -20,6 +20,31 @@
                 </label>
             </fieldset>
             <fieldset>
+                <label>
+                    Veiculo tipo:
+                    <select name="veiculo" required>
+                        <option value="carro">Carro de Passeio</option>
+                        <option value="suv">SUV / Crossover</option>
+                        <option value="caminhao">Caminhão</option>
+                        <option value="moto">Motocicleta</option>
+                        <option value="van">Van</option>
+                        <option value="frota">Veículo de Frota</option>
+                    </select>
+                </label>
+                <label>
+                    Placa
+                    <input required name="placa" placeholder=" Placa" maxlength="25">
+                </label>
+                <label>
+                    Modelo
+                    <input required name="modelo" placeholder=" Modelo" maxlength="50">
+                </label>
+                <label>
+                    cor
+                    <input name="cor" placeholder=" Cor" maxlength="25">
+                </label>
+            </fieldset>
+            <fieldset>
                 <label id="servicosOrdemInput">
                     Seviços
                     <select name="servicoInput" size="5" multiple required onclick="somarValor(this)">
@@ -31,22 +56,8 @@
                 <label>
                     Descrição Veiculo:
                     <textarea required name="descricao" cols="30" rows="8">
-Modelo: ***
-Placa: ***
-Cor: ***
 OBS: ***
                                     </textarea>
-                </label>
-                <label>
-                    Veiculo
-                    <select name="veiculo" required>
-                        <option value="carro">Carro de Passeio</option>
-                        <option value="suv">SUV / Crossover</option>
-                        <option value="caminhao">Caminhão</option>
-                        <option value="moto">Motocicleta</option>
-                        <option value="van">Van</option>
-                        <option value="frota">Veículo de Frota</option>
-                    </select>
                 </label>
             </fieldset>
             <fieldset>
