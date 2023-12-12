@@ -72,7 +72,7 @@ erDiagram
       string descricao
       float preco
   }
-  OrdemServico ||--o{ Veiculo : Inclui
+  OrdemServico ||--o{ Veiculo : Possui
   Veiculo {
       int id
       string Placa
