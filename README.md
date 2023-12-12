@@ -56,6 +56,7 @@ erDiagram
       int id_funcionario
       int id_cliente
       int id_Empresa
+      int id_Veiculo
       int numOS
       string status
       string observacao
@@ -70,6 +71,15 @@ erDiagram
       int id
       string descricao
       float preco
+  }
+  OrdemServico ||--o{ Servico : Inclui
+  Servico {
+      int id
+      string Placa
+      string Modelo
+      string Cor
+      string Tipo
+      
   }
 ```
 
