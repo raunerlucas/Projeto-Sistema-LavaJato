@@ -109,9 +109,9 @@ erDiagram
 
 ### Diagram de Classes
 
-O diagrama que ultilizei como base foi este [https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/diagrama.png]/DataProj/diagrama.png
+O diagrama que ultilizei como base foi este [DataProj => Diagrama.png](https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/diagrama.png)
 
-<img src="/DataProj/diagrama.png" alt="Imagem" width="300" height="200">
+<img src="/DataProj/diagrama.png" alt="Imagem"  width="700" height="500">
 
 ### Imagens do sistema
 
