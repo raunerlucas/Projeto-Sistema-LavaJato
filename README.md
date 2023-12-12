@@ -1,14 +1,12 @@
-# Projeto-Sistema-LavaJato
+# Projeto Sistema LavaJato
 
-Ola meu nome é Rauner!
-Este Projeto foi feito com trabalho final da materia de Prgoramação pra Web 1, 
+Este Projeto foi feito como trabalho final da materia de Programação pra Web 1, 
 em minha faculdade. 
 
 ## Um Pouco sobre o projeto 
 
-Este projeto tem como abjetivo mostra que aprendi lidadar com algun padrões de projeto
-como o DAO, MVC, entre outras coisa, para que fique um pouco mais claro algumas da
-exigencias do projeto são:  
+Este projeto tem como abjetivo mostra que aprendi lidadar com alguns padrões de projeto
+como o DAO e MVC; Requisitos:
 
 * Utilize o padrão de arquitetura MVC;
 * Utilize páginas JSP para fazer a View;
@@ -17,9 +15,9 @@ exigencias do projeto são:
 * Utilize banco de dados relacional para fazer a persistência dos dados;
 * Usuários logados devem estar na sessão. 
 
-Seguindo essa exigencia a regras de negocio e o projeto eu fiz basedo em meu intendimento,
+Seguindo essas exigencias, as regras de negócio e o projeto eu fiz basedo em meu intendimento,
 
-Para o esse projeto Java EE, foi ultilizado Glassfish, Maven e PostgreSQL como banco de dados.(Talves possa extranhar que tudo foi de feito de maneira sincrona, entretando foi pedido do professor que fosse feito desse modo)
+Para esse projeto Java EE, foi ultilizado Glassfish, Maven e PostgreSQL como banco de dados.(Talvez possa estranhar que tudo foi feito de maneira sincrona, entretando foi pedido pelo professor que fosse feito desse modo)
 
 ### Banco de dados
 O Script que usei foi o este [DataProj => scriptBanco.txt](https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/scriptBanco.txt)
