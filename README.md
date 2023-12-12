@@ -23,7 +23,7 @@ Seguindo essa exigencia a regras de negocio e o projeto eu fiz basedo em meu int
 Para o esse projeto Java EE, foi ultilizado Glassfish, Maven e PostgreSQL como banco de dados.
 
 #### Banco de dados
-O Script que que usei foi o estes https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/scriptBanco.txt[/DataProj/scriptBanco.txt]
+O Script que que usei foi o estes https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/scriptBanco.txt [/DataProj/scriptBanco.txt]
 
 O qual segue essa modelagem:
 ```mermaid
@@ -107,10 +107,11 @@ erDiagram
   }
 ```
 
-#### Diagram d Classes
+#### Diagram de Classes
 
-O diagrama que ultilizei como base foi este https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/diagrama.png[/DataProj/diagrama.png]
+O diagrama que ultilizei como base foi este https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/diagrama.png [/DataProj/diagrama.png]
 
+<img src="/DataProj/diagrama.png" alt="Imagem" width="300" height="200">
 
 #### Imagens do sistema
 
@@ -118,7 +119,7 @@ Aqui deixo alguma imagens do Projeto
 
 video: ...
 
-<img src="/DataProj/Captura de tela 2023-12-12 095733.png" alt="Imagem" width="300" height="200">
+<img src="/DataProj/Captura de tela 2023-12-12 095733.png" alt="Imagem" width="900" height="200">
 <img src="/DataProj/Captura de tela 2023-12-12 095859.png" alt="Imagem" width="300" height="200">
 <img src="/DataProj/Captura de tela 2023-12-12 100046.png" alt="Imagem" width="300" height="200">
 <img src="/DataProj/Captura de tela 2023-12-12 100122.png" alt="Imagem" width="300" height="200">
