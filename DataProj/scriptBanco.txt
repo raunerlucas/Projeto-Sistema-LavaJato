@@ -53,15 +53,16 @@ CREATE TABLE OrdemServico (
     id_funcionario INTEGER REFERENCES Funcionario(id) ON DELETE CASCADE,
     id_cliente INTEGER REFERENCES Cliente(id) ON DELETE CASCADE,
     id_empresa INTEGER REFERENCES Empresa(id) ON DELETE CASCADE,
+    id_veiculo INTEGER REFERENCES veiculo(id) ON DELETE CASCADE,
     numOS INTEGER UNIQUE,
     status VARCHAR(255) CHECK (status IN ('AGUARDANDO', 'INICIADO', 'FINALIZADO')),
     observacao VARCHAR(255),
     entregar BOOLEAN,
     servicosOrdem JSONB,
-    dataEmissao DATE,
-    previsaoTermino DATE,
-    ValorTotal FLOAT
+    dataEmissao VARCHAR(255),
+    previsaoTermino VARCHAR(50)
 );
+
 
 -- Criação da tabela Servico
 CREATE TABLE Servico (
@@ -70,26 +71,13 @@ CREATE TABLE Servico (
     preco FLOAT
 );
 
+-- Criação da tabela Veiculo
+CREATE TABLE veiculo (
+    id SERIAL PRIMARY KEY,
+    placa VARCHAR(50) UNIQUE NOT NULL,
+    modelo VARCHAR(100) NOT NULL,
+    tipo VARCHAR(100) NOT NULL,
+    cor VARCHAR(50)
+);
 
 
-
-
-
-
-*--
-
-    Como usar o jsonb:
-    INSER:
-        INSERT INTO OrdemServico (id_funcionario, id_cliente, id_empresa, numOS, status, servicosOrdem, dataEmissao, previsaoTermino, ValorTotal)
-        VALUES (1, 2, 3, 123, 'aguardando', '[{"id_servico": 1, "descricao": "Serviço A", "preco": 50.0}, {"id_servico": 2, "descricao": "Serviço B", "preco": 75.0}]'::jsonb, '2023-11-18', '2023-11-25', 125.0);
-
-    SELECT:
-        SELECT * FROM OrdemServico
-        WHERE servicosOrdem @> '[{"id_servico": 1}]'::jsonb;
-
-    UPDATE:
-        UPDATE OrdemServico
-        SET servicosOrdem = servicosOrdem || '[{"id_servico": 3, "descricao": "Serviço C", "preco": 100.0}]'::jsonb
-        WHERE id = 1;
-
---*
