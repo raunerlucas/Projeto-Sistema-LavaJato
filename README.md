@@ -117,7 +117,10 @@ O diagrama que ultilizei como base foi este [DataProj => Diagrama.png](https://g
 
 Aqui deixo alguma imagens do Projeto
 
-video: ...
+video: [Assista o video aqui](https://drive.google.com/file/d/1kxunj9MVoF_RZR-oIJ9ZNIqEqesnrdX7/view?usp=sharing)
+
+<iframe width="560" height="315" src="https://drive.google.com/file/d/1kxunj9MVoF_RZR-oIJ9ZNIqEqesnrdX7/view?usp=sharing" frameborder="0" allowfullscreen></iframe>
+
 
 <img src="/DataProj/Captura de tela 2023-12-12 095733.png" alt="Imagem" width="900" height="300">
 <img src="/DataProj/Captura de tela 2023-12-12 095859.png" alt="Imagem" width="900" height="300">
