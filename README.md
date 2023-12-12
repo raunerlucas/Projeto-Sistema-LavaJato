@@ -1,7 +1,7 @@
 # Projeto-Sistema-LavaJato
 
 Ola meu nome é Rauner!
-Este Projeto foi feito com trabaho final da materia de Prgoramação pra Web 1, 
+Este Projeto foi feito com trabalho final da materia de Prgoramação pra Web 1, 
 em minha faculdade. 
 
 ## Um Pouco sobre o projeto 
@@ -19,7 +19,7 @@ exigencias do projeto são:
 
 Seguindo essa exigencia a regras de negocio e o projeto eu fiz basedo em meu intendimento,
 
-Para o esse projeto Java EE, foi ultilizado Glassfish, Maven e PostgreSQL como banco de dados.
+Para o esse projeto Java EE, foi ultilizado Glassfish, Maven e PostgreSQL como banco de dados.(Talves possa extranhar que tudo foi de feito de maneira sincrona, entretando foi pedido do professor que fosse feito desse modo)
 
 ### Banco de dados
 O Script que usei foi o este [DataProj => scriptBanco.txt](https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/scriptBanco.txt)
