@@ -72,8 +72,8 @@ erDiagram
       string descricao
       float preco
   }
-  OrdemServico ||--o{ Servico : Inclui
-  Servico {
+  OrdemServico ||--o{ Veiculo : Inclui
+  Veiculo {
       int id
       string Placa
       string Modelo
