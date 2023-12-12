@@ -62,7 +62,7 @@ function editarOrdemServico() {
 function mostraredit() {
     var elemento = document.getElementById('elementoOculto');
     if (elemento.style.display === 'none') {
-        elemento.style.display = 'block';
+        elemento.style.display = 'flex';
     } else {
         elemento.style.display = 'none';
     }
@@ -169,7 +169,7 @@ async function buscarCep(i) {
 function limpar() {
 
     if (document.getElementById('buscas') != null){
-        var divBuscas = document.getElementById('buscas');
+        let divBuscas = document.getElementById('buscas');
         if (divBuscas.innerHTML.trim() !== '') {
             setTimeout(function() {
                 divBuscas.innerHTML = '';
@@ -178,10 +178,11 @@ function limpar() {
     }
 
     if (document.getElementById('msg') != null){
-        var divMsg = document.getElementById('msg');
+        let divMsg = document.getElementById('msg');
+        let pai = divMsg.parentElement
         if (divMsg.innerHTML.trim() !== '') {
             setTimeout(function() {
-                divMsg.innerHTML = '';
+                pai.removeChild(divMsg)
             }, 4000);
         }
     }

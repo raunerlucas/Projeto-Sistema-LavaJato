@@ -33,6 +33,7 @@ public class Logout extends HttpServlet {
                 if (aplicacao.getAttribute("ordemSevico") != null)
                     aplicacao.removeAttribute("ordemSevico");
             }
+            aplicacao.setAttribute("buscados", null);
             response.sendRedirect("index.jsp?msg=Tchau");
         } else {
             response.sendRedirect("index.jsp?msg=Ninguem Logado");

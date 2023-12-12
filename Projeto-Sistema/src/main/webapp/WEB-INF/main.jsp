@@ -1,33 +1,55 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="uS" value="${sessionScope.userSessao}"/>
-<section>
-    <form action="buscar" >
-        <input name="buscar" placeholder=" Buscar Ordem De Serviço" maxlength="25"/>
-        <input type="submit"value="Buscar"/>
-    </form>
-    <div id="buscas">
-        <c:forEach var="buss" items="${applicationScope.buscados}">
-            <li>
-                <a href="${buss.getLink()}">
-                    <button>
-                        <span>${buss.getResumo()}</span><br>
-                    </button>
-                </a>
-            </li>
-        </c:forEach>
+<section class="mainFirst">
+    <div class="userS">
+        <c:set var="uS" value="${sessionScope.userSessao}"/>
+        <c:choose>
+            <c:when test="${uS != null}">
+                <h4> Bem vindo ${uS.getNome()}</h4>
+                <c:choose>
+                    <c:when test="${uS.isFuncionario()}">
+                        <h4> Tipo - Funcionario </h4>
+                    </c:when>
+                    <c:otherwise>
+                        <h4> Tipo - Cliente </h4>
+                    </c:otherwise>
+                </c:choose>
+            </c:when>
+        </c:choose>
+    </div>
+    <div class="busca-div">
+        <form action="buscar" >
+            <input name="buscar" type="text" placeholder=" Buscar Ordem De Serviço" maxlength="25"/>
+            <input type="submit"value="Buscar"/>
+        </form>
+        <div id="buscas">
+            <ul>
+                <c:forEach var="buss" items="${applicationScope.buscados}">
+                    <li>
+                        <a href="${buss.getLink()}">
+                            <button>
+                                <span>${buss.getResumo()}</span><br>
+                            </button>
+                        </a>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
     </div>
     <div id="popApps"></div>
 </section>
-<section>
+<section class="mainSecond">
     <div class="ordens-servico">
         <h2> Ordem de Servico </h2>
-        <c:if test="${uS.isFuncionario()}">
-            <a href="CadastrarOrdem.jsp"><button>NOVA</button></a>
-            <c:if test="${uS.isAdmin()}">
-                <a href="Servicos.jsp"><button>SERVIÇOS</button></a>
+        <div>
+            <c:if test="${uS.isFuncionario()}">
+                <a href="CadastrarOrdem.jsp"><button>NOVA</button></a>
+                <c:if test="${uS.isAdmin()}">
+                    <a href="Servicos.jsp"><button>SERVIÇOS</button></a>
+                </c:if>
             </c:if>
-        </c:if>
+        </div>
         <ul>
             <c:forEach var="ordem" items="${applicationScope.ordemSevico}" >
                 <li>

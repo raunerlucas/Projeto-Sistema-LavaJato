@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.*;
 
 @WebServlet(name = "buscar", value = "/buscar")
@@ -20,11 +21,12 @@ public class Buscar extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-16");
+        response.setCharacterEncoding("UTF-8");
 
         String busca = request.getParameter("buscar");
 
         ServletContext aplicacao = getServletContext();
+        aplicacao.setAttribute("buscados", null);
         HttpSession sessao = request.getSession();
         Funcionario userS = (Funcionario) sessao.getAttribute("userSessao");
 
@@ -86,12 +88,12 @@ public class Buscar extends HttpServlet {
                     }
                 }
             }
-            aplicacao.setAttribute("buscados", null);
             aplicacao.setAttribute("buscados", buscados);
             response.sendRedirect("index.jsp");
 //            response.getWriter().println(buscados);
         } else {
-            response.sendRedirect("index.jsp?msg=Favor logar");
+            String mensagemCodificada = URLEncoder.encode("Algo não está certo", "UTF-8");
+            response.sendRedirect("index.jsp?msg="+mensagemCodificada);
         }
     }
 

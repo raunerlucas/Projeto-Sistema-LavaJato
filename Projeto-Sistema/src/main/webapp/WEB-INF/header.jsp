@@ -1,5 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -9,7 +11,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +29,7 @@
 
 </head>
 <body>
-    <header>
+    <header class="header">
         <img src="images/logo.png">
         <h1>Lava Bem</h1>
         <nav>
@@ -43,19 +45,3 @@
             </div>
         </c:if>
     </header>
-    <div class="cadastros">
-        <c:set var="uS" value="${sessionScope.userSessao}"/>
-        <c:choose>
-            <c:when test="${uS != null}">
-                <h4> Bem vindo ${uS.getNome()}</h4>
-                <c:choose>
-                    <c:when test="${uS.isFuncionario()}">
-                        <h4> Tipo - Funcionario </h4>
-                    </c:when>
-                    <c:otherwise>
-                        <h4> Tipo - Cliente </h4>
-                    </c:otherwise>
-                </c:choose>
-            </c:when>
-        </c:choose>
-    </div>

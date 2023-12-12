@@ -1,8 +1,531 @@
-*{
+/* Regras */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
     font-family: Cambria, sans-serif;
+}
+
+select > option:checked{
+    background-color: #7fc4e7;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+article {
+    flex: 1;
+}
+
+li {
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+button:hover, input[type="submit"]:hover {
+    cursor: pointer;
+}
+.buttonsVeiw button:hover
+{
+    color: white;
+    background: black;
+}
+
+
+/* Header style */
+.header * {
+    background-color: #21218d;
+}
+
+.header {
+    background-color: #21218d;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header > img {
+    width: 8em;
+}
+
+.header > h1 {
+    font-style: italic;
+    font-size: 6em;
+    margin: 0;
+}
+
+.header > nav {
+    margin: 0 3em 0 0;
+}
+
+.header > nav > ul > li > a > button {
+    padding: .5em;
+    border-radius: 6px;
+    font-weight: 600;
+
+    background-color: rgba(255, 255, 255, 0.84);
+
+    -webkit-box-shadow: 10px 10px 20px 2px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 10px 10px 20px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 10px 10px 20px 2px rgba(0, 0, 0, 0.4);
+}
+.header > nav > ul > li > a > button:hover{
+    color: #FFFFFFFF;
+    background-color: #c70606;
+}
+
+#msg, #msg > p {
+    background-color: #30308d;
+}
+
+#msg {
+    padding: .5em;
+    margin: 0 1em;
+
+    font-weight: 600;
+    position: absolute;
+    z-index: 1;
+
+    border: #000000FF solid 1px;
+    border-radius: 2px;
+
+}
+
+/* Footer Style*/
+.footer {
+    align-content: end;
+}
+
+.footer > .rights > h4 {
+    background-color: darkblue;
+
+    padding: 2em;
+
+    text-align: center;
+    font-weight: 900;
+}
+
+/* Login Style */
+
+.login {
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login > div {
+    border: #21218d 2px double;
+
+    padding: 3em;
+    width: 19em;
+    /*margin: 9em auto;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login > div > h3 {
+    font-size: xx-large;
+    padding: 0.3em;
+}
+
+.login > div > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1em;
+}
+
+.login > div > form > label {
+    padding: .5em;
+    font-weight: 600;
+}
+
+.login > div > form > input, .login > div > button {
+    font-size: larger;
+    padding: 0.3em;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.login > div > form > input:hover, .login > div > button:hover {
+    cursor: pointer;
+    color: white;
+    background: black;
+}
+
+.login > div > form > label > input {
+    text-align: center;
+    font-weight: 600;
+
+    border-radius: 6px;
+    border: darkgrey solid 3px;
+
+    width: auto;
+    height: 2em;
+}
+
+/* Article style*/
+.mainFirst{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1em;
+}
+
+.mainFirst > .userS{
+    display: flex;
+}
+.mainFirst > .userS * {
+    margin-right: 1em;
+    padding: .5em;
+    font-style: italic;
+    font-size: larger;
+}
+
+.mainFirst .busca-div{
+    margin: 1em 0;
+}
+
+.mainFirst .busca-div > form > input[type="text"]{
+    border: #000000FF solid 1px;
+    border-radius: 4px;
+
+    height: 1.5em;
+    width: 70%;
+
+    padding: .8em;
+
+    font-weight: 600;
+    font-style: italic;
+}
+
+.mainFirst .busca-div > form > input[type="submit"]{
+    background: transparent;
+    border-radius: 4px;
+    padding: 0 0.3em;
+    font-size: large;
+    font-weight: 600;
+}
+.mainFirst .busca-div > form > input[type="submit"]:hover{
+    cursor: pointer;
+    color: #30308d;
+}
+
+.mainFirst .busca-div #buscas{
+   margin: 1em;
+}
+
+.mainFirst #popApps{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.mainFirst #popApps h3{
+    font-size: xx-large;
+    margin: .2em auto;
+}
+
+.mainSecond{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.ordens-servico, .cliente, .funcionarios{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ordens-servico > div {
+    display: flex;
+}
+.ordens-servico > div > * {
+    padding: 0 .5em;
+}
+
+.ordens-servico a button, .cliente button,
+.funcionarios button,
+.mainFirst .busca-div #buscas button {
+    padding: 0.5em 1em;
+    margin: .5em 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 6px;
+
+    font-weight: 600;
+
     background-color: azure;
 }
+
+/* Ordem Servicos */
+
+.ordens-servico a[href="CadastrarOrdem.jsp"] > button,
+.cliente button[onclick="cadatrarCleinte()"],
+.funcionarios button[onclick="cadatrarFuncio()"]
+{
+    color: #FFFFFFFF;
+    background: #008000E0;
+    border: #008000E0;
+}
+
+.ordens-servico a[href="CadastrarOrdem.jsp"] > button:hover,
+.cliente button[onclick="cadatrarCleinte()"]:hover,
+.funcionarios button[onclick="cadatrarFuncio()"]:hover
+{
+    color: #000000FF;
+    background: #008000FF;
+}
+
+.ordens-servico a[href="Servicos.jsp"] > button{
+    color: #FFFFFFFF;
+    background: #30308DEF;
+    border: #30308d;
+}
+.ordens-servico a[href="Servicos.jsp"] > button:hover{
+    color: #000000FF;
+    background: #30308d;
+}
+
+/* New OS */
+
+.cadastroOS{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 3em;
+}
+
+.cadastroOS h3{
+    text-align: center;
+    font-size: xx-large;
+}
+.cadastroOS a > button{
+    margin: 0.5em 0;
+    padding: 0.2em 0.5em;
+    background: transparent;
+    border-radius: 6px;
+    font-weight: 600;
+}
+.cadastroOS a > button:hover{
+    color: white;
+    background: black;
+}
+
+.cadastroOS form,
+.mainFirst #popApps form
+{
+    padding: 0 1em;
+    border-radius: 6px;
+    border: #000000FF solid 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-size: larger;
+    font-weight: 600;
+}
+
+.cadastroOS form fieldset,
+.mainFirst #popApps form fieldset
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+
+    width: 100%;
+    padding: 1em;
+    margin: 1em;
+
+    border-radius: 4px;
+}
+
+.cadastroOS form input,
+.mainFirst #popApps form input,
+#elementoOculto input[type="submit"]
+{
+    border: #000000FF solid 2px;
+    border-radius: 4px;
+    font-weight: 600;
+    padding: 0.5em;
+    margin: 0 0 1em;
+}
+.cadastroOS form input[type="submit"]:hover,
+#popApps form input[type="submit"]:hover,
+#elementoOculto input[type="submit"]:hover
+{
+    background: #008000E0;
+    color: #FFFFFFFF;
+}
+
+.cadastroOS-fieldset-servicos > *{
+    padding: 1em;
+}
+
+/* Servicos */
+
+.servicos-crud a > button{
+    margin: 0.5em 10%;
+    padding: 0.2em 0.5em;
+    background: transparent;
+    border-radius: 6px;
+    font-weight: 600;
+}
+.servicos-crud a > button:hover{
+    color: white;
+    background: black;
+}
+
+.servicos-crud section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.servicos-cadastro, .servicos-rud{
+    border: #30308d solid 2px;
+    padding: 2em;
+    margin: 0.5em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    font-weight: 600;
+    font-size: large;
+}
+
+.servicos-rud table td{
+    padding: .5em;
+}
+
+.servicos-rud table td button,
+.servicos-cadastro form button,
+.servicos-cadastro form input[type="submit"],
+.mainFirst #popApps button,
+#elementoOculto button
+{
+    border-radius: 4px;
+    padding: .5em;
+    border: solid black 1px;
+}
+
+.servicos-rud table td button[onclick="editarServico(this)"]:hover{
+    color: #ffffffff;
+    background: #30308d;
+}
+
+.servicos-rud table td button:hover,
+.servicos-cadastro form button:hover,
+.mainFirst #popApps button:hover,
+#elementoOculto button:hover
+{
+    color: #ffffffff;
+    background: #c70606;
+}
+
+.servicos-cadastro form input[type="submit"]:hover{
+    background: #008000E0;
+    color: #FFFFFFFF;
+}
+
+/* View */
+
+.buttonsVeiw{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.buttonsVeiw button{
+    margin: 0.5em 20%;
+    padding: 0.2em 0.5em;
+    background: transparent;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.buttonsVeiw a{
+    margin: .2em 1em;
+}
+.buttonsVeiw .btnStatus button:hover{
+    background: #fcd014;
+    color: #ffffff;
+}
+.buttonsVeiw .btnEditar:hover{
+    background: #30308d;
+    color: #ffffff;
+}
+.buttonsVeiw .btnDeletar:hover{
+    background: #c70606;
+    color: #ffffff;
+}
+
+.detailOS{
+    border: #30308d solid 2px;
+    margin: 0 3em;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: flex-end;
+}
+
+.detailOS, .viewForm {
+    padding: 0 3em 2em 3em;
+    font-size: larger;
+}
+
+.viewForm > fieldset{
+    border: #30308d solid 2px;
+    margin: .2em;
+    padding: 1em 3em;
+}
+
+.viewForm fieldset  div{
+    margin: 1em 0;
+}
+
+#elementoOculto {
+    flex-direction: column;
+}
+
+#elementoOculto > fieldset {
+    border: #000000FF solid 2px;
+
+    padding: 1em;
+    margin: 1em;
+
+    font-size: larger;
+    font-weight: 600;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+
+    border-radius: 4px;
+}
+

@@ -5,35 +5,36 @@
 <c:import url="WEB-INF/header.jsp"/>
 <c:choose>
     <c:when test="${uS != null && uS.isFuncionario() && uS.isAdmin()}">
-        <a href="index.jsp"><button>Voltar</button></a>
-        <section>
-            <div>
-                <form action="cadastrarS" method="post">
-                    <h2>Cadastro De Servicos</h2>
-                    <label>
-                        Descrição
-                        <input type="text" required name="descricao" placeholder=" Descriçao" maxlength="50">
-                    </label>
-                    <label>
-                        Preço
-                        <input type="number" required name="preco" placeholder=" Preço" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                    </label>
-                    <input type="hidden" readonly name="id" value="">
-                    <input type="submit" value="Cadastrar">
-                </form>
-            </div>
-            <div>
-                <h2>Serviços Disponiveis</h2>
-                <table>
-                    <thead>
+        <article class="servicos-crud">
+            <a href="index.jsp"><button>Voltar</button></a>
+            <section>
+                <div class="servicos-cadastro">
+                    <form action="cadastrarS" method="post">
+                        <h2>Cadastro De Servicos</h2>
+                        <label>
+                            Descrição
+                            <input type="text" required name="descricao" placeholder=" Descriçao" maxlength="50">
+                        </label>
+                        <label>
+                            Preço
+                            <input type="number" required name="preco" placeholder=" Preço" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        </label>
+                        <input type="hidden" readonly name="id" value="">
+                        <input type="submit" value="Cadastrar">
+                    </form>
+                </div>
+                <div class="servicos-rud">
+                    <h2>Serviços Disponiveis</h2>
+                    <table>
+                        <thead>
                         <tr>
                             <th>Descrição</th>
                             <th>Preço</th>
                             <th>Deletar</th>
                             <th>Editar</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <c:forEach var="ser" items="${applicationScope.servicos}" >
                             <tr>
                                 <td>${ser.getDescricao()}</td>
@@ -48,10 +49,11 @@
                                 </td>
                             </tr>
                         </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </article>
     </c:when>
     <c:otherwise>
         <c:redirect url="index.jsp"/>

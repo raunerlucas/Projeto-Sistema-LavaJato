@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<section>
+<section class="login">
     <div>
         <h3>Funcionario</h3>
         <form method="post" action="login">
