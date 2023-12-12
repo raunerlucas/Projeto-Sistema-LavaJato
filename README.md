@@ -22,7 +22,7 @@ Seguindo essa exigencia a regras de negocio e o projeto eu fiz basedo em meu int
 Para o esse projeto Java EE, foi ultilizado Glassfish, Maven e PostgreSQL como banco de dados.
 
 ### Banco de dados
-O Script que usei foi o este https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/scriptBanco.txt[*DataProj => scriptBanco.txt*]
+O Script que usei foi o este https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/scriptBanco.txt [*DataProj => scriptBanco.txt*]
 
 O qual segue essa modelagem:
 ```mermaid
