@@ -17,8 +17,8 @@ Em conformidade com essas exigências, as regras de negócio e o escopo do proje
 
 Para este projeto Java EE, foram utilizados Glassfish, Maven e PostgreSQL como banco de dados. É importante observar que, embora tenha sido desenvolvido de maneira síncrona, essa abordagem foi solicitada pelo professor responsável.
 
-### Banco de dados
-O script utilizado para criar o banco de dados pode ser encontrado [aqui](https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/scriptBanco.txt)
+## Banco de dados
+O script utilizado para criar o banco de dados pode ser encontrado [aqui.](https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/scriptBanco.txt)
 
 
 O modelo do banco de dados segue a seguinte estrutura:
@@ -103,16 +103,16 @@ erDiagram
   }
 ```
 
-### Diagrama de Classes
+## Diagrama de Classes
 
 O diagrama de classes utilizado como referência está disponível [aqui](https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/diagrama.png)
 
 <img src="/DataProj/diagrama.png" alt="Imagem"  width="700" height="500">
 
-### Imagens do sistema
+## Imagens do sistema
 
 A seguir, algumas imagens do projeto:
-[Assista o video aqui](https://drive.google.com/file/d/1kxunj9MVoF_RZR-oIJ9ZNIqEqesnrdX7/view?usp=sharing)
+[Assista o video aqui.](https://drive.google.com/file/d/1kxunj9MVoF_RZR-oIJ9ZNIqEqesnrdX7/view?usp=sharing)
 
 <img src="/DataProj/Captura de tela 2023-12-12 095733.png" alt="Imagem" width="900" height="300">
 <img src="/DataProj/Captura de tela 2023-12-12 095859.png" alt="Imagem" width="900" height="300">
