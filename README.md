@@ -1,29 +1,27 @@
 # Projeto Sistema LavaJato
 
-Este Projeto foi feito como trabalho final da materia de Programação pra Web 1, 
-em minha faculdade. 
+Este projeto foi desenvolvido como trabalho final da disciplina de Programação para Web 1 na minha faculdade.
 
-## Um Pouco sobre o projeto 
+## Sobre o projeto 
 
-Este projeto tem como abjetivo mostra que aprendi lidadar com alguns padrões de projeto
-como o DAO e MVC; Requisitos:
+O objetivo deste projeto é demonstrar o conhecimento adquirido na aplicação de padrões de projeto, como DAO e MVC. Os requisitos estabelecidos foram os seguintes:
 
-* Utilize o padrão de arquitetura MVC;
-* Utilize páginas JSP para fazer a View;
-* Não utilize scriptless nem expressão nas páginas JSP;
-* Utilize o padrão de projeto DAO;
-* Utilize banco de dados relacional para fazer a persistência dos dados;
-* Usuários logados devem estar na sessão. 
+* Utilização do padrão de arquitetura MVC;
+* Implementação de páginas JSP para a camada de visualização;
+* Proibição do uso de scriptless ou expressões nas páginas JSP;
+* Adoção do padrão de projeto DAO para manipulação de dados;
+* Utilização de banco de dados relacional para persistência dos dados;
+* Gerenciamento de usuários logados por meio de sessões.
 
-Seguindo essas exigencias, as regras de negócio e o projeto eu fiz basedo em meu intendimento,
+Em conformidade com essas exigências, as regras de negócio e o escopo do projeto foram definidos com base no meu entendimento.
 
-Para esse projeto Java EE, foi ultilizado Glassfish, Maven e PostgreSQL como banco de dados.(Talvez possa estranhar que tudo foi feito de maneira sincrona, entretando foi pedido pelo professor que fosse feito desse modo)
+Para este projeto Java EE, foram utilizados Glassfish, Maven e PostgreSQL como banco de dados. É importante observar que, embora tenha sido desenvolvido de maneira síncrona, essa abordagem foi solicitada pelo professor responsável.
 
 ### Banco de dados
-O Script que usei foi o este [DataProj => scriptBanco.txt](https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/scriptBanco.txt)
+O script utilizado para criar o banco de dados pode ser encontrado [aqui](https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/scriptBanco.txt)
 
 
-O qual segue essa modelagem:
+O modelo do banco de dados segue a seguinte estrutura:
 ```mermaid
 erDiagram
   Empresa ||--o{ Endereco : Possui
@@ -105,17 +103,16 @@ erDiagram
   }
 ```
 
-### Diagram de Classes
+### Diagrama de Classes
 
-O diagrama que ultilizei como base foi este [DataProj => Diagrama.png](https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/diagrama.png)
+O diagrama de classes utilizado como referência está disponível [aqui](https://github.com/raunerlucas/Projeto-Sistema-LavaJato/blob/main/DataProj/diagrama.png)
 
 <img src="/DataProj/diagrama.png" alt="Imagem"  width="700" height="500">
 
 ### Imagens do sistema
 
-Aqui deixo alguma imagens do Projeto
-
-video: [Assista o video aqui](https://drive.google.com/file/d/1kxunj9MVoF_RZR-oIJ9ZNIqEqesnrdX7/view?usp=sharing)
+A seguir, algumas imagens do projeto:
+[Assista o video aqui](https://drive.google.com/file/d/1kxunj9MVoF_RZR-oIJ9ZNIqEqesnrdX7/view?usp=sharing)
 
 <img src="/DataProj/Captura de tela 2023-12-12 095733.png" alt="Imagem" width="900" height="300">
 <img src="/DataProj/Captura de tela 2023-12-12 095859.png" alt="Imagem" width="900" height="300">
